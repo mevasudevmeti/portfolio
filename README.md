@@ -31,5 +31,5 @@ Capability, project, and experience content is stored in the arrays at the top o
 
 ## Deployment
 
-The included GitHub Actions workflow deploys the repository as a static GitHub Pages site. In the repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**.
+The included GitHub Actions workflow enables GitHub Pages and deploys the repository as a static site from `main`.
 
