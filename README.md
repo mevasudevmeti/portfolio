@@ -1,8 +1,8 @@
-# OpsLab Control Plane
+# Vasudev Meti - Engineering Portfolio
 
 Portfolio website for **Vasudev Meti**, a software engineer working across frontend, backend, platform delivery, identity, and data.
 
-The interface is designed as an engineering control plane. It presents current experience honestly while leaving clear, reusable modules for future MLOps experiments, model registries, pipelines, and monitoring work.
+The interface is designed as a personal engineering control plane. It presents current experience and education honestly while leaving clear, reusable modules for future MLOps experiments, model registries, pipelines, and monitoring work.
 
 ## Features
 
@@ -31,5 +31,5 @@ Capability, project, and experience content is stored in the arrays at the top o
 
 ## Deployment
 
-The included GitHub Actions workflow enables GitHub Pages and deploys the repository as a static site from `main`.
+GitHub Pages deploys the static site directly from the repository's `main` branch.
 

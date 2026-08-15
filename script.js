@@ -99,13 +99,24 @@ const experience = [
     description: "Built and modernized API-management, operations, identity, and micro-frontend products while strengthening performance, quality, and delivery workflows.",
     highlights: ["React", "Spring Boot", "Micro Frontends", "OIDC / SAML / MFA", "CI/CD"],
   },
+];
+
+const education = [
   {
-    period: "JAN 2026 — MAY 2027",
+    period: "JAN 2026 — EXPECTED MAY 2027",
+    degree: "MSc Advanced Computer Science",
+    institution: "Leeds Beckett University",
     location: "Leeds, United Kingdom",
-    role: "MSc Advanced Computer Science",
-    company: "Leeds Beckett University",
-    description: "Deepening expertise in advanced computing while expanding toward cloud platforms, large-scale system design, machine learning, and MLOps.",
-    highlights: ["Advanced CS", "Systems", "Cloud", "ML trajectory"],
+    description: "Postgraduate study expanding my practice across advanced computing, cloud technologies, large-scale system design, machine learning, and MLOps.",
+    status: "IN PROGRESS",
+  },
+  {
+    period: "2017 — 2021",
+    degree: "BTech Computer Science & Engineering",
+    institution: "Alliance University",
+    location: "Bengaluru, India",
+    description: "Built strong foundations in computer science and software engineering, graduating with an 8.0/10 CGPA.",
+    status: "COMPLETED",
   },
 ];
 
@@ -113,7 +124,8 @@ const navCommands = [
   { label: "Overview", detail: "Profile and status", target: "overview" },
   { label: "Services", detail: "Capability map", target: "services" },
   { label: "Deployments", detail: "Selected projects", target: "projects" },
-  { label: "Activity logs", detail: "Experience timeline", target: "experience" },
+  { label: "Experience", detail: "Work history", target: "experience" },
+  { label: "Education", detail: "Academic history", target: "education" },
   { label: "ML lab", detail: "Future MLOps workspace", target: "ml-lab" },
   { label: "Contact", detail: "Open a connection", target: "contact" },
 ];
@@ -121,6 +133,7 @@ const navCommands = [
 const servicesGrid = document.querySelector("#services-grid");
 const projectsGrid = document.querySelector("#projects-grid");
 const timeline = document.querySelector("#experience-timeline");
+const educationGrid = document.querySelector("#education-grid");
 
 servicesGrid.innerHTML = services
   .map(
@@ -167,6 +180,22 @@ timeline.innerHTML = experience
           <p>${item.description}</p>
           <div class="timeline-highlights">${item.highlights.map((highlight) => `<span>${highlight}</span>`).join("")}</div>
         </div>
+      </article>`,
+  )
+  .join("");
+
+educationGrid.innerHTML = education
+  .map(
+    (item, index) => `
+      <article class="education-card reveal">
+        <div class="education-card-top">
+          <span class="education-index">EDU-${String(index + 1).padStart(2, "0")}</span>
+          <span class="education-status ${item.status === "IN PROGRESS" ? "current" : ""}">${item.status}</span>
+        </div>
+        <p class="education-period">${item.period}</p>
+        <h3>${item.degree}</h3>
+        <p class="education-institution">${item.institution} · ${item.location}</p>
+        <p class="education-description">${item.description}</p>
       </article>`,
   )
   .join("");
@@ -284,7 +313,7 @@ copyEmail.addEventListener("click", async () => {
   } catch {
     copyEmail.textContent = copyEmail.dataset.email;
   }
-  window.setTimeout(() => (copyEmail.textContent = "Copy email"), 2200);
+  window.setTimeout(() => (copyEmail.textContent = "Copy email address"), 2200);
 });
 
 document.querySelector("#current-year").textContent = new Date().getFullYear();
