@@ -1,44 +1,38 @@
 const services = [
   {
-    id: "FE",
     title: "Frontend systems",
     description: "Responsive product interfaces and modular frontend architecture built for real operational workflows.",
     technologies: ["React", "TypeScript", "JavaScript", "Micro Frontends", "Webpack"],
     color: "#38bdf8",
   },
   {
-    id: "BE",
     title: "Backend & APIs",
     description: "Service-oriented applications, secure integrations, data access, and maintainable REST interfaces.",
     technologies: ["Java", "Spring Boot", "Django", "REST APIs", "PostgreSQL"],
     color: "#34d399",
   },
   {
-    id: "ID",
     title: "Identity & security",
     description: "Authentication experiences spanning enterprise identity providers and multi-factor workflows.",
     technologies: ["OIDC", "SAML", "MFA", "Google Authenticator", "Secure flows"],
     color: "#a78bfa",
   },
   {
-    id: "OP",
     title: "Delivery & operations",
     description: "Quality gates and delivery tooling that help teams ship dependable software with confidence.",
     technologies: ["Docker", "GitLab CI/CD", "Cypress", "Jest", "Git"],
     color: "#fbbf24",
   },
   {
-    id: "DA",
     title: "Data analysis",
     description: "Cleaning, validation, statistical analysis, and evidence-led interpretation of complex datasets.",
     technologies: ["Python", "Regression", "Testing", "Data quality", "Survey data"],
     color: "#fb7185",
   },
   {
-    id: "ML",
-    title: "MLOps trajectory",
-    description: "Building toward reproducible model development, deployment, versioning, and observability.",
-    technologies: ["Experimentation", "Pipelines", "Model registry", "Monitoring", "Cloud"],
+    title: "Applied AI systems",
+    description: "Expanding into reliable AI applications with grounded retrieval, agentic workflows, and observable delivery.",
+    technologies: ["Agentic architecture", "Prompt engineering", "RAG", "Evaluations", "Telemetry"],
     color: "#22d3ee",
   },
 ];
@@ -107,7 +101,7 @@ const education = [
     degree: "MSc Advanced Computer Science",
     institution: "Leeds Beckett University",
     location: "Leeds, United Kingdom",
-    description: "Postgraduate study expanding my practice across advanced computing, cloud technologies, large-scale system design, machine learning, and MLOps.",
+    description: "Postgraduate study expanding my practice across advanced computing, cloud technologies, large-scale system design, machine learning, and Applied AI.",
     status: "IN PROGRESS",
   },
   {
@@ -123,10 +117,10 @@ const education = [
 const navCommands = [
   { label: "Overview", detail: "Profile and status", target: "overview" },
   { label: "Services", detail: "Capability map", target: "services" },
-  { label: "Deployments", detail: "Selected projects", target: "projects" },
+  { label: "Deployments", detail: "Projects", target: "projects" },
   { label: "Experience", detail: "Work history", target: "experience" },
   { label: "Education", detail: "Academic history", target: "education" },
-  { label: "ML lab", detail: "Future MLOps workspace", target: "ml-lab" },
+  { label: "Applied AI", detail: "Intelligent systems practice", target: "applied-ai" },
   { label: "Contact", detail: "Open a connection", target: "contact" },
 ];
 
@@ -139,10 +133,7 @@ servicesGrid.innerHTML = services
   .map(
     (service) => `
       <article class="service-card reveal" style="--service-color:${service.color}">
-        <div class="service-top">
-          <span class="service-id">${service.id}</span>
-          <span class="service-state"><i></i> OPERATIONAL</span>
-        </div>
+        <div class="service-top"><span class="service-state"><i></i> OPERATIONAL</span></div>
         <h3>${service.title}</h3>
         <p>${service.description}</p>
         <div class="tech-list">${service.technologies.map((item) => `<span>${item}</span>`).join("")}</div>
@@ -234,14 +225,14 @@ document.querySelectorAll(".filter").forEach((filterButton) => {
 
 const themeButton = document.querySelector("#theme-button");
 const themeIcon = document.querySelector("#theme-icon");
-const preferredTheme = localStorage.getItem("opslab-theme") || "dark";
+const preferredTheme = localStorage.getItem("vasudev-portfolio-theme") || "dark";
 document.documentElement.dataset.theme = preferredTheme;
 themeIcon.textContent = preferredTheme === "dark" ? "☼" : "☾";
 themeButton.addEventListener("click", () => {
   const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
   document.documentElement.dataset.theme = nextTheme;
   themeIcon.textContent = nextTheme === "dark" ? "☼" : "☾";
-  localStorage.setItem("opslab-theme", nextTheme);
+  localStorage.setItem("vasudev-portfolio-theme", nextTheme);
 });
 
 const menuButton = document.querySelector("#menu-button");

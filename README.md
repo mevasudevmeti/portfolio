@@ -2,7 +2,7 @@
 
 Portfolio website for **Vasudev Meti**, a software engineer working across frontend, backend, platform delivery, identity, and data.
 
-The interface is designed as a personal engineering control plane. It presents current experience and education honestly while leaving clear, reusable modules for future MLOps experiments, model registries, pipelines, and monitoring work.
+The interface is designed as a personal engineering control plane. It presents current experience and education honestly while leaving clear, reusable modules for future Applied AI projects, agentic systems, retrieval workflows, evaluations, and telemetry.
 
 ## Features
 
@@ -12,7 +12,7 @@ The interface is designed as a personal engineering control plane. It presents c
 - Keyboard command palette (`Ctrl/Cmd + K`)
 - Dark and light themes with saved preference
 - Accessible semantic structure and reduced-motion support
-- Future-facing MLOps lab without placeholder claims
+- Future-facing Applied AI workspace without placeholder claims
 - Zero runtime dependencies or build step
 
 ## Run locally
@@ -27,7 +27,7 @@ Then visit `http://localhost:8080`.
 
 ## Content updates
 
-Capability, project, and experience content is stored in the arrays at the top of `script.js`. Add future MLOps case studies to the `projects` array and extend the ML lab as real experiments are completed.
+Capability, project, and experience content is stored in the arrays at the top of `script.js`. Add future Applied AI case studies to the `projects` array and extend the AI workspace as real experiments are completed.
 
 ## Deployment
 

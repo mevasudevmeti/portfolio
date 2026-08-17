@@ -238,7 +238,9 @@ h1 span { color: var(--muted); font-weight: 500; }
 .runtime-data div { display: grid; grid-template-columns: 114px 1fr; gap: 12px; }
 .runtime-data dt, .runtime-data dd { margin: 0; font-family: var(--font-mono); font-size: 9px; line-height: 1.55; }
 .runtime-data dt { color: var(--subtle); }
-.runtime-data dd { color: var(--muted); }
+.runtime-data dd { min-width: 0; color: var(--muted); overflow-wrap: anywhere; }
+.runtime-data a { color: var(--cyan); text-decoration: none; }
+.runtime-data a:hover { text-decoration: underline; }
 .runtime-data .healthy { color: var(--green); }
 .runtime-footer { display: flex; justify-content: space-between; padding: 10px 12px; border-radius: 7px; background: rgba(0, 0, 0, 0.18); font-family: var(--font-mono); font-size: 9px; }
 [data-theme="light"] .runtime-footer { background: rgba(5, 36, 60, 0.05); }
@@ -259,8 +261,7 @@ h1 span { color: var(--muted); font-weight: 500; }
 .service-card { position: relative; overflow: hidden; padding: 25px; border: 1px solid var(--border); border-radius: 15px; background: var(--panel); transition: 0.25s ease; }
 .service-card:hover { transform: translateY(-3px); border-color: var(--border-bright); background: var(--panel-hover); }
 .service-card::after { position: absolute; right: -40px; bottom: -60px; width: 140px; height: 140px; border-radius: 50%; background: var(--service-color); opacity: 0.06; filter: blur(15px); content: ""; }
-.service-top { display: flex; align-items: center; justify-content: space-between; }
-.service-id { display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid color-mix(in srgb, var(--service-color), transparent 65%); border-radius: 10px; background: color-mix(in srgb, var(--service-color), transparent 90%); color: var(--service-color); font-family: var(--font-mono); font-size: 10px; font-weight: 600; }
+.service-top { display: flex; align-items: center; justify-content: flex-end; }
 .service-state { display: flex; align-items: center; gap: 7px; color: var(--green); font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.08em; }
 .service-state i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
 .service-card h3 { margin: 20px 0 6px; font-size: 18px; }
