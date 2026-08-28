@@ -1,18 +1,18 @@
-# Vasudev Meti - Engineering Portfolio
+# Vasudev Meti — Software Engineering Portfolio
 
-Portfolio website for **Vasudev Meti**, a software engineer working across frontend, backend, platform delivery, identity, and data.
+Portfolio website for **Vasudev Meti**, an experienced software engineer moving into evaluation-driven Applied AI and LLMOps.
 
-The interface is designed as a personal engineering control plane. It presents current experience and education honestly while leaving clear, reusable modules for future Applied AI projects, agentic systems, retrieval workflows, evaluations, and telemetry.
+The interface retains an operations-dashboard identity in a focused, light-only design. It prioritises inspectable project evidence, career progression and concise recruiter-facing content.
 
 ## Features
 
-- Responsive operations-dashboard interface
-- Data-driven capability, project, and experience sections
-- Project filtering by engineering discipline
+- Responsive, light-only operations-dashboard interface
+- Featured case studies before experience and capabilities
+- Evidence-led project status, decisions, limitations and repository links
 - Keyboard command palette (`Ctrl/Cmd + K`)
-- Dark and light themes with saved preference
-- Accessible semantic structure and reduced-motion support
-- Future-facing Applied AI workspace without placeholder claims
+- Accessible navigation, focus indicators, skip link and reduced-motion support
+- Two clearly labelled Applied AI projects in development
+- Downloadable, recruiter-focused CV
 - Zero runtime dependencies or build step
 
 ## Run locally
@@ -27,9 +27,8 @@ Then visit `http://localhost:8080`.
 
 ## Content updates
 
-Capability, project, and experience content is stored in the arrays at the top of `script.js`. Add future Applied AI case studies to the `projects` array and extend the AI workspace as real experiments are completed.
+Content is written directly in `index.html`; `script.js` only handles navigation, the command palette, reveal effects and copy-email feedback. Add AI capabilities only when repository evidence demonstrates that they are implemented.
 
 ## Deployment
 
 GitHub Pages deploys the static site directly from the repository's `main` branch.
-
