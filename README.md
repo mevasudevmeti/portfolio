@@ -1,6 +1,6 @@
 # Vasudev Meti — Software Engineering Portfolio
 
-Portfolio website for **Vasudev Meti**, an experienced software engineer moving into evaluation-driven Applied AI and LLMOps.
+Portfolio website for **Vasudev Meti**, an experienced software engineer moving into evaluation-driven Applied AI and MLOps.
 
 The interface retains an operations-dashboard identity in a focused, light-only design. It prioritises inspectable project evidence, career progression and concise recruiter-facing content.
 
