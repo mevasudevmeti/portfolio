@@ -8,6 +8,58 @@ const navCommands = [
   { label: "Contact", detail: "Email, CV and profiles", target: "contact-heading" },
 ];
 
+const paperReveal = document.querySelector("#paper-reveal");
+const paperSkip = document.querySelector("#paper-skip");
+const appShell = document.querySelector(".app-shell");
+
+if (paperReveal) {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isDeepLink = window.location.hash && window.location.hash !== "#overview";
+  let introSeen = false;
+  let tearTimer;
+  let cleanupTimer;
+
+  try {
+    introSeen = window.sessionStorage.getItem("portfolio-intro-seen") === "true";
+  } catch {
+    introSeen = false;
+  }
+
+  const completePaperReveal = (immediate = false) => {
+    window.clearTimeout(tearTimer);
+    window.clearTimeout(cleanupTimer);
+    try {
+      window.sessionStorage.setItem("portfolio-intro-seen", "true");
+    } catch {
+      // The animation still completes when storage is unavailable.
+    }
+    document.body.classList.remove("intro-active");
+    appShell.inert = false;
+
+    if (immediate) {
+      paperReveal.remove();
+      return;
+    }
+
+    paperReveal.classList.add("is-tearing");
+    cleanupTimer = window.setTimeout(() => paperReveal.remove(), 1050);
+  };
+
+  if (prefersReducedMotion || isDeepLink || introSeen) {
+    completePaperReveal(true);
+  } else {
+    document.body.classList.add("intro-active");
+    appShell.inert = true;
+    window.requestAnimationFrame(() => paperReveal.classList.add("is-ready"));
+    const startTear = () => {
+      tearTimer = window.setTimeout(() => completePaperReveal(), 650);
+    };
+    if (document.readyState === "complete") startTear();
+    else window.addEventListener("load", startTear, { once: true });
+    paperSkip.addEventListener("click", () => completePaperReveal(true), { once: true });
+  }
+}
+
 const revealObserver = new IntersectionObserver(
   (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("visible")),
   { threshold: 0.06 },

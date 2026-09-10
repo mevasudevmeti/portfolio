@@ -23,10 +23,27 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260828-1" />
-    <script src="script.js?v=20260828-1" defer></script>
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        if (sessionStorage.getItem("portfolio-intro-seen") === "true") document.documentElement.classList.add("intro-seen");
+      } catch {}
+      if (location.hash && location.hash !== "#overview") document.documentElement.classList.add("intro-seen");
+    </script>
+    <link rel="stylesheet" href="styles.css?v=20260910-1" />
+    <script src="script.js?v=20260910-1" defer></script>
   </head>
   <body>
+    <div class="paper-reveal" id="paper-reveal" aria-label="Portfolio intro animation">
+      <div class="paper-panel paper-panel-left" aria-hidden="true"></div>
+      <div class="paper-panel paper-panel-right" aria-hidden="true"></div>
+      <div class="paper-reveal-copy" aria-hidden="true">
+        <span>VASUDEV METI</span>
+        <strong>ENGINEERING PORTFOLIO</strong>
+      </div>
+      <div class="paper-tear-line" aria-hidden="true"></div>
+      <button class="paper-skip" id="paper-skip" type="button">Skip intro</button>
+    </div>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="ambient ambient-one" aria-hidden="true"></div>
     <div class="ambient ambient-two" aria-hidden="true"></div>
