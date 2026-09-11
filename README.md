@@ -11,7 +11,7 @@ The interface retains an operations-dashboard identity in a focused, light-only 
 - Evidence-led project status, decisions, limitations and repository links
 - Keyboard command palette (`Ctrl/Cmd + K`)
 - Accessible navigation, focus indicators, skip link and reduced-motion support
-- Two clearly labelled Applied AI projects in development
+- ModuleAtlas and an AI incident-response concept, both clearly labelled as development-stage work
 - Downloadable, recruiter-focused CV
 - Zero runtime dependencies or build step
 
