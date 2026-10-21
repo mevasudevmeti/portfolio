@@ -1,0 +1,158 @@
+/* Opening journey and personal interest animations. */
+.journey-intro { position:fixed; inset:0; width:100vw; max-width:none; height:100dvh; max-height:none; margin:0; padding:24px; border:0; color:#244334; background:radial-gradient(ellipse at 50% 40%,#fffdf2,#e7ecdc); overflow:auto; }
+.journey-intro[open] { display:grid; place-items:center; }
+.journey-intro::backdrop { background:#e7ecdc; }
+.journey-intro-open { overflow:hidden; }
+.intro-content { text-align:center; animation:intro-arrive .7s ease both; }
+.intro-name { font-size:11px; letter-spacing:4px; font-weight:600; }
+.intro-trail { width:min(360px,75vw); height:150px; margin:15px 0 0; overflow:visible; }
+.intro-mountains { fill:none; stroke:#b7c4a4; stroke-width:1; }
+.intro-infinity { fill:none; stroke:#557749; stroke-width:2; stroke-linecap:round; stroke-dasharray:850; animation:trail-draw 3s ease both; }
+.intro-traveller { fill:#c6814a; offset-path:path('M200 100 C160 42 60 42 60 100 C60 158 160 158 200 100 C240 42 340 42 340 100 C340 158 240 158 200 100'); animation:follow-trail 3.4s ease-in-out both; }
+.intro-overline { font:9px var(--font-mono); letter-spacing:2px; margin-top:18px; }
+#intro-tagline { font-size:clamp(38px,7vw,76px); line-height:1.06; letter-spacing:-2px; font-weight:500; margin:20px 0; }
+#intro-tagline em { font-family:Georgia,serif; color:#607b4c; font-weight:400; }
+.intro-footnote { font-size:12px; color:#667459; }
+.intro-skip { position:absolute; right:28px; bottom:28px; border:1px solid #bcc8ad; background:#fbfbef; padding:12px 18px; border-radius:30px; font-size:12px; cursor:pointer; }
+.intro-skip span { margin-left:20px; }
+.about-portrait { padding-bottom:16px; }
+.dumbbell-icon { position:relative; display:inline-block; width:1.2em; text-align:center; color:#426949; }
+.dumbbell-icon::before,.dumbbell-icon::after { content:''; position:absolute; top:50%; width:.18em; height:.7em; border-radius:.05em; background:currentColor; transform:translateY(-50%); box-shadow:-.13em 0 0 -.035em currentColor; }
+.dumbbell-icon::before { left:.2em; }
+.dumbbell-icon::after { right:.2em; box-shadow:.13em 0 0 -.035em currentColor; }
+.hobby-symbol[hidden],.dance-stage[hidden] { display:none; }
+.dance-stage { text-align:center; }
+.dancing-guy { width:170px; height:180px; overflow:visible; }
+.dance-shadow { fill:#dce4d1; }
+.dance-arm path { fill:none; stroke:#c88c61; stroke-width:10; stroke-linecap:round; stroke-linejoin:round; }
+.dance-leg path { fill:none; stroke:#293d34; stroke-width:13; stroke-linecap:round; stroke-linejoin:round; }
+.dancer-body { transform-origin:90px 105px; animation:dancer-groove 2s ease-in-out 3; }
+.left-arm { transform-origin:78px 63px; animation:dancer-wave-left 1s ease-in-out 6; }
+.right-arm { transform-origin:102px 63px; animation:dancer-wave-right 1s ease-in-out 6; }
+.left-leg { transform-origin:84px 106px; animation:dancer-step 1s ease-in-out 6; }
+.right-leg { transform-origin:96px 106px; animation:dancer-step 1s ease-in-out .5s 6; }
+.dance-caption { font-size:10px; color:#6a795d; margin:0; }
+@keyframes intro-arrive { from { transform:translateY(12px); } to { transform:none; } }
+@keyframes trail-draw { from { stroke-dashoffset:850; } to { stroke-dashoffset:0; } }
+@keyframes follow-trail { from { offset-distance:0%; } to { offset-distance:100%; } }
+@keyframes dancer-groove { 0%,100% { transform:translateX(-6px) rotate(-5deg); } 25%,75% { transform:translateY(-6px); } 50% { transform:translateX(6px) rotate(5deg); } }
+@keyframes dancer-wave-left { 0%,100% { transform:rotate(0deg); } 50% { transform:rotate(45deg); } }
+@keyframes dancer-wave-right { 0%,100% { transform:rotate(0deg); } 50% { transform:rotate(-45deg); } }
+@keyframes dancer-step { 0%,100% { transform:rotate(-8deg); } 50% { transform:rotate(12deg); } }
+@media(prefers-reduced-motion:reduce) { .intro-content,.intro-infinity,.intro-traveller,.dancer-body,.dance-arm,.dance-leg { animation:none; } }
+@media(max-width:600px) { .intro-skip { bottom:24px; right:24px; } .intro-overline { font-size:8px; letter-spacing:1.4px; } }
+
+/* Collected stickers live in their own margins and interludes, never over copy. */
+.sticker-definitions { position:absolute; width:0; height:0; overflow:hidden; pointer-events:none; }
+.intro-content { position:relative; z-index:2; }
+.intro-stickers { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.intro-sticker { position:absolute; filter:drop-shadow(0 8px 6px #263f3220); animation:sticker-arrive .65s cubic-bezier(.2,.8,.2,1.2) both; }
+.intro-game { width:clamp(115px,17vw,220px); left:5%; top:17%; transform:rotate(-13deg); animation-delay:.15s; }
+.intro-game img { width:100%; display:block; }
+.intro-game span,.intro-dancer span { display:block; font:7px var(--font-mono); letter-spacing:1px; text-align:center; margin-top:10px; }
+.intro-pad { width:clamp(100px,14vw,185px); right:7%; top:17%; transform:rotate(17deg); animation-delay:.35s; }
+.intro-dancer { width:clamp(85px,12vw,155px); right:10%; bottom:13%; transform:rotate(5deg); animation-delay:.55s; }
+.intro-dancer svg { width:100%; display:block; }
+.intro-weights { width:clamp(95px,13vw,175px); left:10%; bottom:12%; transform:rotate(-8deg); animation-delay:.4s; }
+.intro-ball { width:60px; left:29%; top:9%; transform:rotate(20deg); animation-delay:.6s; }
+.intro-stickers .moon-leg-a { transform-origin:82px 105px; animation:moon-step .8s ease-in-out 4; }
+.intro-stickers .moon-leg-b { transform-origin:91px 105px; animation:moon-step .8s ease-in-out -.4s 4; }
+.intro-stickers .moon-body { animation:moon-lean .8s ease-in-out 4; transform-origin:80px 150px; }
+.ambient-shelf { pointer-events:none; }
+.moon-leg-a { transform-origin:82px 105px; animation:moon-step .8s ease-in-out infinite; animation-play-state:var(--sticker-play,running); }
+.moon-leg-b { transform-origin:91px 105px; animation:moon-step .8s ease-in-out -.4s infinite; animation-play-state:var(--sticker-play,running); }
+.moon-body { transform-origin:80px 150px; animation:moon-lean .8s ease-in-out infinite; animation-play-state:var(--sticker-play,running); }
+.ambient-shelf:not(.shelf-visible),.motion-paused { --sticker-play:paused; }
+.bike-lane { position:relative; width:min(380px,100%); height:62px; overflow:hidden; margin-top:14px; }
+.ride-interlude { max-width:1076px; margin:0 auto; padding:24px 32px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.ride-interlude>span { font:8px var(--font-mono); letter-spacing:1.2px; color:#6e7c61; }
+.ride-interlude .bike-lane { margin-top:0; }
+.lane-dashes { position:absolute; bottom:9px; left:0; right:0; border-bottom:1px dashed #69866660; }
+.passing-bike { position:absolute; bottom:8px; left:0; width:86px; height:55px; animation:bike-pass 14s linear infinite; }
+.bike-wheel { animation:wheel-roll .65s linear infinite; animation-play-state:var(--sticker-play,running); }
+.interest-interlude,.moonwalk-interlude,.gym-interlude { max-width:1076px; margin:0 auto; padding:10px 32px; position:relative; display:flex; align-items:center; justify-content:space-between; min-height:175px; }
+.sticker-postcard { width:180px; transform:rotate(-9deg); padding-top:10px; }
+.sticker-postcard img { display:block; width:100%; filter:drop-shadow(0 6px 6px #283f2922); }
+.sticker-postcard span,.resting-controller span,.moonwalk-interlude>span,.gym-interlude span { display:block; font:8px var(--font-mono); letter-spacing:1.2px; color:#6e7c61; }
+.sticker-postcard span { font-size:6px; margin-top:8px; text-align:center; }
+.resting-controller { width:135px; transform:rotate(14deg); margin-right:38px; }
+.resting-controller svg { width:100%; filter:drop-shadow(0 6px 5px #283f2915); }
+.resting-controller span { font-size:7px; text-align:center; margin-top:6px; }
+.shelf-visible .resting-controller { animation:controller-nudge 8s ease-in-out 2; }
+.moonwalk-interlude { min-height:150px; padding-block:5px; gap:20px; }
+.moonwalk-track { width:300px; height:140px; overflow:hidden; border-bottom:1px solid #cbd3be; }
+.moon-slide { width:110px; height:135px; animation:moon-glide 12s ease-in-out infinite; }
+.moonwalk-track .moon-leg-a { transform-origin:82px 105px; animation:moon-step .8s ease-in-out infinite; }
+.moonwalk-track .moon-leg-b { transform-origin:91px 105px; animation:moon-step .8s ease-in-out -.4s infinite; }
+.moonwalk-track .moon-body { animation:moon-lean .8s ease-in-out infinite; transform-origin:80px 150px; }
+.resting-ball { width:63px; height:63px; margin-right:32px; transform:rotate(-15deg); }
+.shelf-visible .resting-ball { animation:ball-hop 9s ease-in-out 2; }
+.gym-interlude { justify-content:flex-start; gap:22px; min-height:155px; }
+.stacked-plates { width:135px; height:125px; transform:rotate(-3deg); }
+.gym-interlude small { display:block; font-size:11px; color:#7b866f; margin-top:10px; }
+.shelf-visible .stacked-plates { animation:plate-settle 7s ease-in-out 2; }
+.ambient-shelf:not(.shelf-visible) *,.motion-paused .ambient-shelf * { animation-play-state:paused!important; }
+.motion-paused .intro-stickers *,.motion-paused .intro-sticker { animation:none!important; }
+.personality-controls { display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+.personality-controls button { border:0; background:none; color:#526b4b; font:10px var(--font-sans); text-decoration:underline; text-underline-offset:4px; padding:8px 0; cursor:pointer; }
+@keyframes sticker-arrive { from { scale:.8; translate:0 12px; } to { scale:1; translate:0 0; } }
+@keyframes bike-pass { 0%,8% { transform:translateX(-110px); } 48%,100% { transform:translateX(420px); } }
+@keyframes wheel-roll { to { rotate:360deg; } }
+@keyframes moon-glide { 0%,10% { transform:translateX(150px); } 75%,100% { transform:translateX(-110px); } }
+@keyframes moon-step { 0%,100% { transform:rotate(-9deg) translateX(-4px); } 50% { transform:rotate(12deg) translateX(4px); } }
+@keyframes moon-lean { 0%,100% { transform:rotate(-6deg) translateY(0); } 50% { transform:rotate(-3deg) translateY(-2px); } }
+@keyframes controller-nudge { 0%,70%,100% { transform:rotate(14deg); } 75% { transform:rotate(9deg) translateY(-5px); } 80% { transform:rotate(16deg); } }
+@keyframes ball-hop { 0%,75%,100% { transform:translateY(0) rotate(-15deg); } 82% { transform:translateY(-15px) rotate(0); } 88% { transform:translateY(0) rotate(15deg); } }
+@keyframes plate-settle { 0%,80%,100% { transform:rotate(-3deg); } 85% { transform:translateY(-5px) rotate(0); } 90% { transform:translateY(0) rotate(-3deg); } }
+@media(max-width:900px) {
+  .intro-game { left:3%; top:10%; width:130px; }
+  .intro-pad { right:4%; top:11%; width:120px; }
+  .intro-dancer { right:7%; bottom:12%; width:100px; }
+  .intro-weights { left:8%; bottom:12%; width:110px; }
+  .intro-ball { width:40px; left:44%; top:7%; }
+}
+@media(max-width:600px) {
+  .intro-game { top:8%; left:5%; width:100px; }
+  .intro-game span { font-size:5px; }
+  .intro-pad { top:12%; right:6%; width:85px; }
+  .intro-dancer { width:80px; bottom:14%; right:8%; }
+  .intro-dancer span { font-size:5px; }
+  .intro-weights { width:85px; bottom:14%; left:7%; }
+  .intro-ball { top:6%; width:30px; left:48%; }
+  .intro-content { padding-top:0; }
+  .intro-trail { width:220px; height:95px; margin-top:0; }
+  .intro-name { font-size:9px; letter-spacing:3px; }
+  .intro-overline { font-size:6px; }
+  #intro-tagline { font-size:38px; }
+  .bike-lane { height:45px; margin-top:0; width:220px; }
+  .ride-interlude { padding:22px 26px; flex-wrap:wrap; gap:5px; }
+  .passing-bike { width:68px; height:44px; bottom:3px; }
+  .lane-dashes { bottom:4px; }
+  .interest-interlude,.moonwalk-interlude,.gym-interlude { padding-inline:26px; min-height:130px; }
+  .sticker-postcard { width:128px; }
+  .sticker-postcard span { font-size:5px; }
+  .resting-controller { width:95px; margin-right:0; }
+  .moonwalk-interlude { flex-wrap:wrap; gap:5px; }
+  .moonwalk-interlude>span { width:100%; font-size:7px; padding-top:10px; }
+  .moonwalk-track { width:200px; height:118px; }
+  .moon-slide { width:90px; height:115px; }
+  .resting-ball { width:45px; height:45px; margin-right:0; }
+  .stacked-plates { width:95px; height:95px; flex-shrink:0; }
+  .gym-interlude { gap:12px; }
+  .gym-interlude span { font-size:6px; }
+  .gym-interlude small { font-size:9px; }
+}
+@media(max-height:650px) {
+  .intro-game,.intro-pad { top:5%; width:80px; }
+  .intro-dancer,.intro-weights { bottom:10%; width:70px; }
+  .intro-ball { display:none; }
+  .intro-trail { height:65px; }
+  #intro-tagline { font-size:34px; margin:12px 0; }
+  .intro-overline { margin-top:6px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .moon-leg-a,.moon-leg-b,.moon-body,.bike-wheel { animation:none!important; }
+  .intro-sticker,.intro-stickers *,.ambient-shelf * { animation:none!important; }
+  .passing-bike { transform:translateX(90px); }
+  .moon-slide { transform:translateX(60px); }
+}

@@ -1,0 +1,835 @@
+/* Original landscape and trail navigation;
+existing evidence remains intact. */
+:root{
+  --bg:#f5f3e9;
+  --bg-raised:#faf9f2;
+  --panel:#fffdf5;
+  --panel-solid:#fffdf5;
+  --panel-hover:#f0f0e3;
+  --border:#dadfce;
+  --text:#213c32;
+  --muted:#5e7063;
+  --subtle:#6d7a6b;
+  --cyan:#305c45;
+  --cyan-deep:#244b38;
+  --cyan-soft:#e6ebdf;
+  --green:#426949;
+  --radius:20px;
+  --shadow:0 18px 50px #233a2610;
+  --topbar-height:20px
+}
+body{
+  background:var(--bg);
+  padding-bottom:92px
+}
+body::before,.ambient{
+  display:none
+}
+a{
+  text-underline-offset:4px
+}
+.app-shell{
+  display:block
+}
+.workspace{
+  margin:0;
+  width:100%;
+  min-width:0
+}
+main{
+  width:100%;
+  max-width:none;
+  padding:0
+}
+.trail-header{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  z-index:5;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:27px 5%;
+  gap:20px
+}
+.trail-brand{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  text-decoration:none;
+  font-size:11px;
+  letter-spacing:1.5px;
+  font-weight:700
+}
+.trail-monogram{
+  width:46px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  background:#244b38;
+  color:#fff9e9;
+  border-radius:50%;
+  font-family:Georgia,serif;
+  font-size:26px;
+  letter-spacing:-2px
+}
+.trail-brand small{
+  display:block;
+  font-weight:400;
+  letter-spacing:0;
+  font-size:11px;
+  margin-top:2px
+}
+.availability{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  font-size:12px;
+  border:1px solid #3d594527;
+  border-radius:30px;
+  background:#fffcf0b8;
+  padding:9px 15px
+}
+.trail-hero{
+  position:relative;
+  isolation:isolate;
+  min-height:860px;
+  height:min(950px,100svh);
+  overflow:hidden;
+  background:#d6dfca
+}
+.landscape{
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  background:url('assets/trail-landscape.webp') center 58% / cover no-repeat
+}
+.trail-hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(90deg,#f7f4dfd9 0%,#f7f4df88 31%,transparent 65%)
+}
+.trail-hero::after{
+  content:'';
+  position:absolute;
+  bottom:-1px;
+  left:0;
+  right:0;
+  height:33px;
+  background:var(--bg);
+  clip-path:polygon(0 56%,4% 67%,9% 45%,14% 62%,19% 40%,24% 66%,29% 49%,34% 70%,39% 40%,44% 64%,49% 45%,54% 60%,59% 41%,64% 67%,69% 45%,74% 61%,79% 40%,84% 65%,89% 46%,94% 62%,100% 44%,100% 100%,0 100%)
+}
+.trail-intro{
+  position:relative;
+  z-index:2;
+  padding-top:155px;
+  margin-left:7%;
+  width:min(570px,46%)
+}
+.trail-eyebrow{
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:1.7px;
+  display:flex;
+  align-items:center;
+  gap:9px
+}
+.trail-eyebrow>span{
+  height:6px;
+  width:6px;
+  border-radius:50%;
+  background:#607b46
+}
+.hello{
+  font-family:Georgia,serif;
+  font-style:italic;
+  font-size:25px;
+  margin:27px 0 14px
+}
+.trail-intro h1{
+  font-size:clamp(45px,5.4vw,80px);
+  letter-spacing:-4px;
+  line-height:1.02;
+  margin:0 0 25px;
+  font-weight:600
+}
+.trail-intro h1 em,.about-copy h2 em{
+  font-family:Georgia,'Times New Roman',serif;
+  font-weight:400;
+  color:#426647
+}
+.trail-summary{
+  font-size:16px;
+  line-height:1.8;
+  color:#314c3c
+}
+.trail-cta{
+  display:inline-flex;
+  align-items:center;
+  gap:34px;
+  background:#244b38;
+  color:#fff9e9;
+  text-decoration:none;
+  padding:13px 20px;
+  border-radius:7px;
+  font-size:13px;
+  margin-top:9px;
+  box-shadow:0 4px 12px #22453220;
+  transition:transform .2s
+}
+.trail-cta:hover{
+  transform:translateY(-3px)
+}
+.trail-note{
+  font-size:10px;
+  letter-spacing:.3px;
+  margin-top:16px;
+  color:#38513d
+}
+.landmark{
+  position:absolute;
+  z-index:3;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#fffdf2ee;
+  padding:11px 14px 11px 10px;
+  border:1px solid #f9f4df;
+  border-radius:12px;
+  box-shadow:0 8px 25px #19362230;
+  text-decoration:none;
+  color:#244334;
+  font-size:13px;
+  transition:transform .2s,box-shadow .2s;
+  min-height:62px
+}
+.landmark::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  top:calc(100% + 10px);
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  border:3px solid #fff7df;
+  background:#c48049;
+  box-shadow:0 0 0 5px #fff7df45
+}
+.landmark:hover{
+  transform:translateY(-5px);
+  box-shadow:0 12px 25px #19362240
+}
+.landmark small{
+  display:block;
+  font-size:10px;
+  color:#65715f;
+  margin-top:1px
+}
+.landmark-number{
+  font-family:var(--font-mono);
+  font-size:10px;
+  border:1px solid #d5dac7;
+  border-radius:50%;
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center
+}
+.landmark>span:last-child{
+  margin-left:7px
+}
+.basecamp{
+  left:12%;
+  top:72%
+}
+.outpost{
+  left:44%;
+  top:59%
+}
+.checkpoint{
+  right:11%;
+  top:45%
+}
+.summit{
+  right:17%;
+  top:23%
+}
+.campfire{
+  right:15%;
+  top:78%
+}
+.map-caption{
+  position:absolute;
+  bottom:56px;
+  left:5%;
+  font-size:12px;
+  color:#fef9e6;
+  text-shadow:0 1px 6px #163826;
+  background:#203f34b3;
+  padding:10px 16px;
+  border-radius:8px
+}
+.map-caption>span{
+  font-size:20px;
+  margin-right:6px
+}
+.map-caption small{
+  display:block;
+  font-size:10px;
+  margin-left:28px;
+  opacity:.8
+}
+.scroll-cue{
+  position:absolute;
+  bottom:35px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#fbf5dd;
+  font-size:8px;
+  letter-spacing:2px;
+  text-decoration:none;
+  background:#213d30b5;
+  padding:7px 10px;
+  border-radius:30px
+}
+.scroll-cue span{
+  margin-left:14px
+}
+.trail-dock{
+  position:fixed;
+  z-index:20;
+  bottom:22px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  gap:4px;
+  white-space:nowrap;
+  background:#fffdf1ed;
+  border:1px solid #ffffffb0;
+  box-shadow:0 8px 32px #17352424;
+  border-radius:50px;
+  padding:7px;
+  backdrop-filter:blur(18px)
+}
+.trail-dock a{
+  padding:11px 17px;
+  text-decoration:none;
+  border-radius:40px;
+  font-size:12px;
+  transition:background .2s
+}
+.trail-dock a:hover,.trail-dock a[aria-current]{
+  background:#e5eadc
+}
+.trail-dock .dock-cv{
+  background:#254d39;
+  color:#fff9e9;
+  padding-inline:23px
+}
+.section{
+  max-width:1140px;
+  margin:0 auto;
+  padding:80px 32px;
+  border-bottom:1px solid var(--border)
+}
+.section-heading{
+  margin-bottom:32px
+}
+.section-heading h2,.contact-panel h2{
+  letter-spacing:-1.3px;
+  font-size:clamp(28px,3vw,42px);
+  line-height:1.15
+}
+.mono-kicker{
+  letter-spacing:1.6px;
+  font-size:10px;
+  color:#6b795d
+}
+.about-section{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:85px;
+  align-items:center;
+  padding-top:100px;
+  padding-bottom:100px
+}
+.about-portrait{
+  position:relative;
+  background:#e6e9db;
+  padding:16px 16px 35px;
+  transform:rotate(-3deg);
+  border:1px solid #cbd3bd;
+  border-radius:4px;
+  box-shadow:0 16px 40px #273e2312;
+  max-width:370px;
+  margin-inline:auto
+}
+.about-portrait::before{
+  content:'';
+  position:absolute;
+  width:100px;
+  height:27px;
+  top:-12px;
+  left:calc(50% - 50px);
+  background:#cebb8ba6;
+  transform:rotate(5deg)
+}
+.about-portrait img{
+  width:100%;
+  height:340px;
+  object-fit:cover;
+  object-position:top;
+  border-radius:2px
+}
+.about-portrait>span{
+  display:block;
+  font-family:var(--font-mono);
+  font-size:8px;
+  letter-spacing:1px;
+  text-align:center;
+  margin-top:15px
+}
+.about-copy h2{
+  font-size:48px;
+  letter-spacing:-2px;
+  line-height:1.08;
+  margin:15px 0 23px
+}
+.about-copy>p:not(.mono-kicker){
+  font-size:14px;
+  line-height:1.8;
+  color:var(--muted)
+}
+.about-copy .hobby-invitation{
+  font-size:11px!important;
+  margin-top:24px
+}
+.hobby-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px
+}
+.hobby-buttons button{
+  background:transparent;
+  border:1px solid #cdd5c2;
+  border-radius:25px;
+  padding:8px 13px;
+  font-size:12px;
+  cursor:pointer;
+  transition:background .2s,transform .2s
+}
+.hobby-buttons button:hover{
+  background:#e5eadb;
+  transform:translateY(-2px)
+}
+.hobby-dialog{
+  position:fixed;
+  inset:0;
+  width:min(470px,calc(100% - 32px));
+  border:1px solid #d0d7c4;
+  border-radius:20px;
+  padding:40px;
+  background:#faf8ed;
+  color:var(--text);
+  box-shadow:0 30px 90px #102d3240
+}
+.hobby-dialog::backdrop,.command-dialog::backdrop{
+  background:#142c2588;
+  backdrop-filter:blur(7px)
+}
+.dialog-close{
+  position:absolute;
+  top:10px;
+  right:12px;
+  width:44px;
+  height:44px;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  font-size:27px
+}
+.hobby-symbol{
+  display:block;
+  font-family:Georgia,serif;
+  font-size:75px;
+  line-height:1.3;
+  color:#6a8056
+}
+.hobby-dialog h2{
+  font-family:Georgia,serif;
+  font-size:35px;
+  line-height:1.1;
+  margin:15px 0
+}
+.hobby-description{
+  font-size:15px;
+  line-height:1.8;
+  color:var(--muted)
+}
+.hobby-back{
+  margin-top:15px
+}
+.hobby-dialog[data-interest=dance] .hobby-symbol{
+  animation:little-dance .7s ease-in-out 3
+}
+.project-details{
+  border-top:1px solid var(--border);
+  margin-top:18px
+}
+.project-details summary{
+  list-style:none;
+  cursor:pointer;
+  padding:16px 0;
+  font-size:12px;
+  font-weight:600;
+  display:flex;
+  justify-content:space-between
+}
+.project-details summary::-webkit-details-marker{
+  display:none
+}
+.project-details[open] summary span{
+  transform:rotate(45deg)
+}
+.project-details .case-facts{
+  margin-top:0
+}
+.case-study,.capability-card,.ai-project-card,.education-card,.experience-card{
+  box-shadow:none
+}
+.case-study{
+  border-radius:18px;
+  background:#fffdf5
+}
+.case-media{
+  background:#e5e9da
+}
+.case-media img{
+  object-fit:contain
+}
+.case-index,.education-index{
+  color:#708064
+}
+.contact-panel{
+  background:#e7ecdf;
+  border-color:#cbd4bf;
+  padding:42px
+}
+.contact-panel .visible-email{
+  color:#31553e
+}
+.tech-list span{
+  background:#edf0e5;
+  border-color:#d9dfcf;
+  color:#4c624f
+}
+.button{
+  border-radius:8px
+}
+.button-primary{
+  background:#2d533d;
+  color:#fffbed;
+  border-color:#2d533d
+}
+.button-secondary{
+  background:transparent;
+  border-color:#cad4bf;
+  color:#35533e
+}
+footer{
+  max-width:1140px;
+  margin:0 auto;
+  padding:30px 32px;
+  font-size:11px
+}
+.reveal{
+  opacity:1;
+  transform:none
+}
+.js .reveal{
+  opacity:0;
+  transform:translateY(12px)
+}
+.js .reveal.visible{
+  opacity:1;
+  transform:none
+}
+@keyframes little-dance{
+  0%,100%{
+    transform:rotate(-8deg)
+  }
+  50%{
+    transform:rotate(8deg)
+  }
+}
+@media(min-width:1600px){
+  .trail-intro{
+    margin-left:calc((100vw - 1400px)/2)
+  }
+  .trail-hero{
+    height:950px
+  }
+  .landscape{
+    background-position:center 62%
+  }
+}
+@media(max-width:900px){
+  .trail-intro{
+    width:51%;
+    margin-left:5%
+  }
+  .trail-intro h1{
+    letter-spacing:-2.5px
+  }
+  .trail-summary{
+    font-size:14px
+  }
+  .landmark{
+    font-size:11px;
+    padding:9px;
+    gap:6px
+  }
+  .landmark small{
+    font-size:9px
+  }
+  .landmark-number{
+    width:24px;
+    height:24px
+  }
+  .basecamp{
+    left:7%
+  }
+  .outpost{
+    left:38%;
+    top:63%
+  }
+  .checkpoint{
+    right:5%;
+    top:49%
+  }
+  .summit{
+    right:7%;
+    top:28%
+  }
+  .campfire{
+    right:8%;
+    top:80%
+  }
+  .about-section{
+    gap:40px
+  }
+  .about-copy h2{
+    font-size:39px
+  }
+  .about-portrait img{
+    height:280px
+  }
+}
+@media(max-width:600px){
+  .trail-header{
+    padding:19px 20px
+  }
+  .trail-brand{
+    font-size:10px;
+    gap:9px
+  }
+  .trail-brand small{
+    font-size:9px
+  }
+  .trail-monogram{
+    width:39px;
+    height:39px;
+    font-size:23px
+  }
+  .availability{
+    font-size:0;
+    padding:10px;
+    border:0;
+    background:#fcfaedb8
+  }
+  .availability .status-dot{
+    margin:0
+  }
+  .availability>span:last-child{
+    font-size:14px
+  }
+  .trail-hero{
+    min-height:960px;
+    height:960px
+  }
+  .landscape{
+    background-position:56% bottom;
+    background-size:auto 78%;
+    background-color:#e9e9d4
+  }
+  .trail-hero::before{
+    background:linear-gradient(#f6f3e4 0%,#f6f3e4ed 25%,#f6f3e475 45%,transparent 61%)
+  }
+  .trail-intro{
+    padding-top:116px;
+    margin-left:25px;
+    width:calc(100% - 50px)
+  }
+  .trail-eyebrow{
+    font-size:8px;
+    letter-spacing:1.4px
+  }
+  .hello{
+    margin-top:22px;
+    font-size:22px;
+    margin-bottom:11px
+  }
+  .trail-intro h1{
+    font-size:49px;
+    letter-spacing:-2.8px
+  }
+  .trail-summary{
+    font-size:13px;
+    line-height:1.7
+  }
+  .trail-cta{
+    padding:11px 16px;
+    font-size:12px;
+    margin-top:5px
+  }
+  .trail-note{
+    font-size:9px
+  }
+  .landmarks{
+    position:absolute;
+    inset:490px 17px 110px
+  }
+  .landmark{
+    padding:9px 10px;
+    min-height:57px;
+    max-width:190px;
+    font-size:11px;
+    border-radius:10px
+  }
+  .landmark-number{
+    width:23px;
+    height:23px;
+    font-size:8px
+  }
+  .landmark>span:last-child{
+    margin-left:2px
+  }
+  .landmark small{
+    font-size:9px
+  }
+  .landmark::after{
+    height:7px;
+    width:7px;
+    top:calc(100% + 6px);
+    border-width:2px
+  }
+  .basecamp{
+    top:67%;
+    left:0
+  }
+  .outpost{
+    top:38%;
+    left:9%
+  }
+  .checkpoint{
+    top:20%;
+    right:0
+  }
+  .summit{
+    top:0;
+    right:7%
+  }
+  .campfire{
+    top:85%;
+    right:0
+  }
+  .map-caption{
+    bottom:45px;
+    left:22px;
+    font-size:10px;
+    padding:7px 10px
+  }
+  .map-caption small{
+    font-size:8px
+  }
+  .scroll-cue{
+    display:none
+  }
+  .trail-dock{
+    bottom:14px;
+    width:calc(100% - 24px);
+    max-width:450px;
+    justify-content:space-between;
+    gap:0;
+    padding:6px
+  }
+  .trail-dock a{
+    font-size:10px;
+    padding:10px 9px
+  }
+  .trail-dock .dock-cv{
+    padding:11px 14px
+  }
+  .dock-map-label{
+    display:none
+  }
+  .section{
+    padding:55px 22px
+  }
+  .about-section{
+    grid-template-columns:1fr;
+    gap:37px
+  }
+  .about-portrait{
+    max-width:230px
+  }
+  .about-portrait img{
+    height:225px
+  }
+  .about-copy h2{
+    font-size:41px
+  }
+  .about-copy>p:not(.mono-kicker){
+    font-size:13px
+  }
+  .section-heading{
+    gap:16px
+  }
+  .section-heading h2,.contact-panel h2{
+    font-size:29px
+  }
+  .contact-panel{
+    padding:24px
+  }
+  .contact-panel .visible-email{
+    font-size:clamp(15px,4.5vw,22px);
+    overflow-wrap:anywhere
+  }
+  footer{
+    padding:25px 22px
+  }
+  .hobby-dialog{
+    padding:32px 26px
+  }
+  .hobby-dialog h2{
+    font-size:31px
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html{
+    scroll-behavior:auto!important
+  }
+  *,*::before,*::after{
+    animation:none!important;
+    transition:none!important
+  }
+  .js .reveal{
+    opacity:1;
+    transform:none
+  }
+}
