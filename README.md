@@ -8,6 +8,8 @@ An original illustrated mountain trail introduces the person behind the code. In
 
 - Responsive mountain landscape with five clickable landmarks and persistent recruiter navigation
 - Personal interest dialogs for trekking, rides, gaming, sports, dance and gym
+- A skippable 3.4-second opening with “A beginning without an end”, an animated endless mountain trail, and once-per-session playback. Direct section links and reduced-motion preferences bypass the intro.
+- Bike and controller emoji, a dumbbell icon, Ghost of Yōtei in the gaming panel, and a short animated dancer sequence
 - Original AI-generated landscape, delivered as an optimised WebP asset
 - Expandable engineering details for the featured AutoOps case study
 - Featured case studies before experience and capabilities

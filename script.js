@@ -1,4 +1,20 @@
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const intro = document.querySelector('#journey-intro');
+let introTimer;
+let hasSeenIntro = false;
+try { hasSeenIntro = sessionStorage.getItem('vasu-trail-intro') === 'seen'; } catch { /* Storage may be disabled. */ }
+if (!location.hash && !hasSeenIntro && !reducedMotion.matches) {
+  intro.showModal();
+  document.body.classList.add('journey-intro-open');
+  introTimer = window.setTimeout(() => intro.close(), 3400);
+}
+intro.querySelector('.intro-skip').addEventListener('click', () => intro.close());
+intro.addEventListener('close', () => {
+  window.clearTimeout(introTimer);
+  document.body.classList.remove('journey-intro-open');
+  try { sessionStorage.setItem('vasu-trail-intro', 'seen'); } catch { /* Intro still works without storage. */ }
+});
+reducedMotion.addEventListener('change', event => { if (event.matches && intro.open) intro.close(); });
 const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
@@ -7,16 +23,20 @@ const revealObserver = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
 const hobbies = {
   trekking: { symbol: '↟', title: 'One more trail.', description: 'Trekking is one of my favourite ways to step away from the screen, get outside and explore somewhere new.' },
-  rides: { symbol: '↗', title: 'Take the scenic route.', description: 'I enjoy heading out for rides. Sometimes a change of scenery is exactly what the day needs.' },
-  gaming: { symbol: '＋', title: 'A different kind of challenge.', description: 'Video games are part of my downtime. A chance to play, explore and get absorbed in a different world.' },
+  rides: { symbol: '🏍️', title: 'Take the scenic route.', description: 'I enjoy heading out for bike rides. Sometimes a change of scenery is exactly what the day needs.' },
+  gaming: { symbol: '🎮', title: 'A different kind of adventure.', description: 'I love games like Ghost of Yōtei. Exploring beautiful worlds, getting drawn into a story and taking on a new challenge are some of my favourite ways to switch off.' },
   sports: { symbol: '◉', title: 'Always up for a game.', description: 'I enjoy playing sports. Getting moving and sharing a game is a good balance to time spent at a desk.' },
-  dance: { symbol: '♫', title: 'Find a little rhythm.', description: 'I dance, too. A different kind of energy, and another way to enjoy life outside engineering.' },
-  gym: { symbol: '↔', title: 'Keep showing up.', description: 'The gym is part of my routine. A little time to focus on movement and make room for myself outside work.' }
+  dance: { symbol: '🕺', title: 'Find a little rhythm.', description: 'I love to dance. A few moves, a little rhythm and a different kind of energy outside engineering.' },
+  gym: { symbol: 'dumbbell', title: 'Keep showing up.', description: 'The gym is part of my routine. A little time to focus on movement, pick up the dumbbells and make room for myself outside work.' }
 };
 const hobbyDialog = document.querySelector('#hobby-dialog');
 document.querySelectorAll('[data-hobby]').forEach(button => button.addEventListener('click', () => {
   const hobby = hobbies[button.dataset.hobby];
-  hobbyDialog.querySelector('.hobby-symbol').textContent = hobby.symbol;
+  const symbol = hobbyDialog.querySelector('.hobby-symbol');
+  symbol.textContent = hobby.symbol === 'dumbbell' ? '━' : hobby.symbol;
+  symbol.classList.toggle('dumbbell-icon', hobby.symbol === 'dumbbell');
+  symbol.hidden = button.dataset.hobby === 'dance';
+  hobbyDialog.querySelector('.dance-stage').hidden = button.dataset.hobby !== 'dance';
   hobbyDialog.querySelector('h2').textContent = hobby.title;
   hobbyDialog.querySelector('.hobby-description').textContent = hobby.description;
   hobbyDialog.dataset.interest = button.dataset.hobby;
@@ -52,7 +72,7 @@ commandInput.addEventListener('keydown',event=>{
 });
 document.addEventListener('keydown',event=>{
   if((event.metaKey||event.ctrlKey)&&event.key.toLowerCase()==='k'){
-    event.preventDefault();if(hobbyDialog.open)return;
+    event.preventDefault();if(hobbyDialog.open || intro.open)return;
     if(commandDialog.open)commandDialog.close();
     else{commandInput.value='';selectedCommand=0;renderCommands();commandDialog.showModal();commandInput.focus();}
   }

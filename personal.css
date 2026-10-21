@@ -1,0 +1,43 @@
+/* Opening journey and personal interest animations. */
+.journey-intro { position:fixed; inset:0; width:100vw; max-width:none; height:100dvh; max-height:none; margin:0; padding:24px; border:0; color:#244334; background:radial-gradient(ellipse at 50% 40%,#fffdf2,#e7ecdc); overflow:auto; }
+.journey-intro[open] { display:grid; place-items:center; }
+.journey-intro::backdrop { background:#e7ecdc; }
+.journey-intro-open { overflow:hidden; }
+.intro-content { text-align:center; animation:intro-arrive .7s ease both; }
+.intro-name { font-size:11px; letter-spacing:4px; font-weight:600; }
+.intro-trail { width:min(360px,75vw); height:150px; margin:15px 0 0; overflow:visible; }
+.intro-mountains { fill:none; stroke:#b7c4a4; stroke-width:1; }
+.intro-infinity { fill:none; stroke:#557749; stroke-width:2; stroke-linecap:round; stroke-dasharray:850; animation:trail-draw 3s ease both; }
+.intro-traveller { fill:#c6814a; offset-path:path('M200 100 C160 42 60 42 60 100 C60 158 160 158 200 100 C240 42 340 42 340 100 C340 158 240 158 200 100'); animation:follow-trail 3.4s ease-in-out both; }
+.intro-overline { font:9px var(--font-mono); letter-spacing:2px; margin-top:18px; }
+#intro-tagline { font-size:clamp(38px,7vw,76px); line-height:1.06; letter-spacing:-2px; font-weight:500; margin:20px 0; }
+#intro-tagline em { font-family:Georgia,serif; color:#607b4c; font-weight:400; }
+.intro-footnote { font-size:12px; color:#667459; }
+.intro-skip { position:absolute; right:28px; bottom:28px; border:1px solid #bcc8ad; background:#fbfbef; padding:12px 18px; border-radius:30px; font-size:12px; cursor:pointer; }
+.intro-skip span { margin-left:20px; }
+.about-portrait { padding-bottom:16px; }
+.dumbbell-icon { position:relative; display:inline-block; width:1.2em; text-align:center; color:#426949; }
+.dumbbell-icon::before,.dumbbell-icon::after { content:''; position:absolute; top:50%; width:.18em; height:.7em; border-radius:.05em; background:currentColor; transform:translateY(-50%); box-shadow:-.13em 0 0 -.035em currentColor; }
+.dumbbell-icon::before { left:.2em; }
+.dumbbell-icon::after { right:.2em; box-shadow:.13em 0 0 -.035em currentColor; }
+.hobby-symbol[hidden],.dance-stage[hidden] { display:none; }
+.dance-stage { text-align:center; }
+.dancing-guy { width:170px; height:180px; overflow:visible; }
+.dance-shadow { fill:#dce4d1; }
+.dance-arm path { fill:none; stroke:#c88c61; stroke-width:10; stroke-linecap:round; stroke-linejoin:round; }
+.dance-leg path { fill:none; stroke:#293d34; stroke-width:13; stroke-linecap:round; stroke-linejoin:round; }
+.dancer-body { transform-origin:90px 105px; animation:dancer-groove 2s ease-in-out 3; }
+.left-arm { transform-origin:78px 63px; animation:dancer-wave-left 1s ease-in-out 6; }
+.right-arm { transform-origin:102px 63px; animation:dancer-wave-right 1s ease-in-out 6; }
+.left-leg { transform-origin:84px 106px; animation:dancer-step 1s ease-in-out 6; }
+.right-leg { transform-origin:96px 106px; animation:dancer-step 1s ease-in-out .5s 6; }
+.dance-caption { font-size:10px; color:#6a795d; margin:0; }
+@keyframes intro-arrive { from { transform:translateY(12px); } to { transform:none; } }
+@keyframes trail-draw { from { stroke-dashoffset:850; } to { stroke-dashoffset:0; } }
+@keyframes follow-trail { from { offset-distance:0%; } to { offset-distance:100%; } }
+@keyframes dancer-groove { 0%,100% { transform:translateX(-6px) rotate(-5deg); } 25%,75% { transform:translateY(-6px); } 50% { transform:translateX(6px) rotate(5deg); } }
+@keyframes dancer-wave-left { 0%,100% { transform:rotate(0deg); } 50% { transform:rotate(45deg); } }
+@keyframes dancer-wave-right { 0%,100% { transform:rotate(0deg); } 50% { transform:rotate(-45deg); } }
+@keyframes dancer-step { 0%,100% { transform:rotate(-8deg); } 50% { transform:rotate(12deg); } }
+@media(prefers-reduced-motion:reduce) { .intro-content,.intro-infinity,.intro-traveller,.dancer-body,.dance-arm,.dance-leg { animation:none; } }
+@media(max-width:600px) { .intro-skip { bottom:24px; right:24px; } .intro-overline { font-size:8px; letter-spacing:1.4px; } }

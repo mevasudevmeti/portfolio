@@ -29,9 +29,24 @@
     </script>
     <link rel="stylesheet" href="styles.css?v=trail-1" />
     <link rel="stylesheet" href="trail.css?v=trail-1" />
-    <script src="script.js?v=trail-1" defer></script>
+    <link rel="stylesheet" href="personal.css?v=trail-2" />
+    <script src="script.js?v=trail-2" defer></script>
   </head>
   <body>
+    <dialog class="journey-intro" id="journey-intro" aria-labelledby="intro-tagline">
+      <div class="intro-content">
+        <p class="intro-name">VASUDEV METI</p>
+        <svg class="intro-trail" viewBox="0 0 400 160" aria-hidden="true">
+          <path class="intro-mountains" d="M20 130 90 35 145 104 203 20 286 125 337 55 380 130" />
+          <path class="intro-infinity" d="M200 100 C160 42 60 42 60 100 C60 158 160 158 200 100 C240 42 340 42 340 100 C340 158 240 158 200 100" />
+          <circle class="intro-traveller" r="5" cx="0" cy="0" />
+        </svg>
+        <p class="intro-overline">EVERY TRAIL IS A NEW BEGINNING</p>
+        <h2 id="intro-tagline">A beginning<br><em>without an end.</em></h2>
+        <p class="intro-footnote">Build. Explore. Keep going.</p>
+      </div>
+      <button class="intro-skip" type="button">Enter the trail <span aria-hidden="true">↗</span></button>
+    </dialog>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="ambient ambient-one" aria-hidden="true"></div>
     <div class="ambient ambient-two" aria-hidden="true"></div>
@@ -64,13 +79,13 @@
             <a class="scroll-cue" href="#about">THERE'S MORE BELOW <span aria-hidden="true">↓</span></a>
           </section>
           <section class="section about-section" id="about" aria-labelledby="about-title">
-            <div class="about-portrait"><img src="assets/vasudev-meti.png" alt="Vasudev Meti" loading="lazy"><span>01 / THE PERSON BEHIND THE CODE</span></div>
+            <div class="about-portrait"><img src="assets/vasudev-meti.png" alt="Vasudev Meti" loading="lazy"></div>
             <div class="about-copy"><p class="mono-kicker">WELCOME TO BASECAMP</p><h2 id="about-title">An engineer.<br>A little restless.<br><em>Always exploring.</em></h2>
               <p>I'm Vasudev Meti, a software engineer based in Leeds. I've spent 4+ years working across React, TypeScript and Java/Spring systems. Now I'm extending that foundation into Applied AI and MLOps, alongside an MSc in Advanced Computer Science.</p>
               <p>Away from the keyboard, you'll find me trekking, heading out for a ride, playing sports or video games, dancing, or getting a gym session in.</p>
               <p class="hobby-invitation">A few things that keep me moving. Pick one ↓</p>
               <div class="hobby-buttons" aria-label="Discover my interests">
-                <button type="button" data-hobby="trekking">↟ Trekking</button><button type="button" data-hobby="rides">↗ Rides</button><button type="button" data-hobby="gaming">＋ Gaming</button><button type="button" data-hobby="sports">◉ Sports</button><button type="button" data-hobby="dance">♫ Dance</button><button type="button" data-hobby="gym">↔ Gym</button>
+                <button type="button" data-hobby="trekking"><span aria-hidden="true">↟</span> Trekking</button><button type="button" data-hobby="rides"><span aria-hidden="true">🏍️</span> Rides</button><button type="button" data-hobby="gaming"><span aria-hidden="true">🎮</span> Gaming</button><button type="button" data-hobby="sports"><span aria-hidden="true">◉</span> Sports</button><button type="button" data-hobby="dance"><span aria-hidden="true">🕺</span> Dance</button><button type="button" data-hobby="gym"><span class="dumbbell-icon" aria-hidden="true">━</span> Gym</button>
               </div>
             </div>
           </section>
@@ -226,7 +241,17 @@
       <a href="#overview" aria-label="Back to the trail map">↟<span class="dock-map-label"> Map</span></a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#contact">Contact</a><a class="dock-cv" href="assets/vasudev-meti-cv.pdf" download>CV ↗</a>
     </nav>
     <dialog class="hobby-dialog" id="hobby-dialog" aria-labelledby="hobby-title">
-      <button class="dialog-close" type="button" aria-label="Close interest">×</button><p class="mono-kicker">OFF THE CLOCK</p><span class="hobby-symbol" aria-hidden="true"></span><h2 id="hobby-title"></h2><p class="hobby-description"></p><button class="button button-primary hobby-back" type="button">Back to the trail ↗</button>
+      <button class="dialog-close" type="button" aria-label="Close interest">×</button><p class="mono-kicker">OFF THE CLOCK</p><span class="hobby-symbol" aria-hidden="true"></span>
+      <div class="dance-stage" hidden>
+        <svg class="dancing-guy" viewBox="0 0 180 180" role="img" aria-label="A little dancer doing a side step, arm wave and celebratory groove">
+          <ellipse class="dance-shadow" cx="90" cy="166" rx="37" ry="5" />
+          <g class="dancer-body"><circle cx="90" cy="35" r="15" fill="#c88c61"/><path d="M75 32 Q72 10 91 15 Q110 17 105 33 L97 26 80 28Z" fill="#263d32"/>
+          <path d="M90 57 90 106" stroke="#426949" stroke-width="27" stroke-linecap="round"/>
+          <g class="dance-arm left-arm"><path d="M78 63 57 83 38 66"/></g><g class="dance-arm right-arm"><path d="M102 63 122 81 141 58"/></g>
+          <g class="dance-leg left-leg"><path d="M84 106 70 132 62 157"/></g><g class="dance-leg right-leg"><path d="M96 106 112 132 122 157"/></g></g>
+        </svg><p class="dance-caption">A side step. An arm wave. A little groove.</p>
+      </div>
+      <h2 id="hobby-title"></h2><p class="hobby-description"></p><button class="button button-primary hobby-back" type="button">Back to the trail ↗</button>
     </dialog>
     <dialog class="command-dialog" id="command-dialog" aria-label="Jump to a portfolio section">
       <div class="command-search"><span aria-hidden="true">⌕</span><input id="command-input" type="search" placeholder="Jump to a portfolio section..." aria-label="Search portfolio sections" /><kbd>ESC</kbd></div>
