@@ -64,6 +64,9 @@
 .moon-body { transform-origin:80px 150px; animation:moon-lean .8s ease-in-out infinite; animation-play-state:var(--sticker-play,running); }
 .ambient-shelf:not(.shelf-visible),.motion-paused { --sticker-play:paused; }
 .bike-lane { position:relative; width:min(380px,100%); height:62px; overflow:hidden; margin-top:14px; }
+.ride-interlude { max-width:1076px; margin:0 auto; padding:24px 32px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.ride-interlude>span { font:8px var(--font-mono); letter-spacing:1.2px; color:#6e7c61; }
+.ride-interlude .bike-lane { margin-top:0; }
 .lane-dashes { position:absolute; bottom:9px; left:0; right:0; border-bottom:1px dashed #69866660; }
 .passing-bike { position:absolute; bottom:8px; left:0; width:86px; height:55px; animation:bike-pass 14s linear infinite; }
 .bike-wheel { animation:wheel-roll .65s linear infinite; animation-play-state:var(--sticker-play,running); }
@@ -122,7 +125,7 @@
   .intro-overline { font-size:6px; }
   #intro-tagline { font-size:38px; }
   .bike-lane { height:45px; margin-top:0; width:220px; }
-  .landmarks { top:550px; bottom:85px; }
+  .ride-interlude { padding:22px 26px; flex-wrap:wrap; gap:5px; }
   .passing-bike { width:68px; height:44px; bottom:3px; }
   .lane-dashes { bottom:4px; }
   .interest-interlude,.moonwalk-interlude,.gym-interlude { padding-inline:26px; min-height:130px; }
