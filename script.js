@@ -3,11 +3,14 @@ const intro = document.querySelector('#journey-intro');
 let introTimer;
 let hasSeenIntro = false;
 try { hasSeenIntro = sessionStorage.getItem('vasu-trail-intro') === 'seen'; } catch { /* Storage may be disabled. */ }
-if (!location.hash && !hasSeenIntro && !reducedMotion.matches) {
+const openIntro = () => {
+  window.clearTimeout(introTimer);
   intro.showModal();
   document.body.classList.add('journey-intro-open');
   introTimer = window.setTimeout(() => intro.close(), 3400);
-}
+};
+if (!location.hash && !hasSeenIntro && !reducedMotion.matches) openIntro();
+document.querySelector('#replay-intro').addEventListener('click', openIntro);
 intro.querySelector('.intro-skip').addEventListener('click', () => intro.close());
 intro.addEventListener('close', () => {
   window.clearTimeout(introTimer);
@@ -15,6 +18,25 @@ intro.addEventListener('close', () => {
   try { sessionStorage.setItem('vasu-trail-intro', 'seen'); } catch { /* Intro still works without storage. */ }
 });
 reducedMotion.addEventListener('change', event => { if (event.matches && intro.open) intro.close(); });
+const motionToggle = document.querySelector('#toggle-motion');
+let motionPaused = reducedMotion.matches;
+const applyMotionPreference = () => {
+  document.body.classList.toggle('motion-paused', motionPaused || reducedMotion.matches);
+  motionToggle.setAttribute('aria-pressed', String(motionPaused || reducedMotion.matches));
+  motionToggle.textContent = motionPaused || reducedMotion.matches ? 'Animations paused' : 'Pause animations';
+};
+motionToggle.addEventListener('click', () => {
+  if (reducedMotion.matches) return;
+  motionPaused = !motionPaused;
+  applyMotionPreference();
+  if (motionPaused) motionToggle.textContent = 'Resume animations';
+});
+reducedMotion.addEventListener('change', event => { motionPaused = event.matches; applyMotionPreference(); });
+applyMotionPreference();
+const shelfObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => entry.target.classList.toggle('shelf-visible', entry.isIntersecting));
+}, { threshold: 0.15 });
+document.querySelectorAll('.ambient-shelf').forEach(shelf => shelfObserver.observe(shelf));
 const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
