@@ -1,174 +1,71 @@
-const navCommands = [
-  { label: "Overview", detail: "Positioning and contact", target: "overview" },
-  { label: "Projects", detail: "Case studies and evidence", target: "projects-heading" },
-  { label: "Experience", detail: "Professional progression", target: "experience-heading" },
-  { label: "Capabilities", detail: "Verified technical toolkit", target: "capabilities-heading" },
-  { label: "AI Projects", detail: "Work in development", target: "ai-projects-heading" },
-  { label: "Education", detail: "Academic background", target: "education-heading" },
-  { label: "Contact", detail: "Email, CV and profiles", target: "contact-heading" },
-];
-
-const paperReveal = document.querySelector("#paper-reveal");
-const paperSkip = document.querySelector("#paper-skip");
-const appShell = document.querySelector(".app-shell");
-
-if (paperReveal) {
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let tearTimer;
-  let cleanupTimer;
-
-  const completePaperReveal = (immediate = false) => {
-    window.clearTimeout(tearTimer);
-    window.clearTimeout(cleanupTimer);
-    document.body.classList.remove("intro-active");
-    appShell.inert = false;
-
-    if (immediate) {
-      paperReveal.remove();
-      return;
-    }
-
-    paperReveal.classList.add("is-tearing");
-    cleanupTimer = window.setTimeout(() => paperReveal.remove(), 2200);
-  };
-
-  if (prefersReducedMotion) {
-    completePaperReveal(true);
-  } else {
-    document.body.classList.add("intro-active");
-    appShell.inert = true;
-    window.requestAnimationFrame(() => paperReveal.classList.add("is-ready"));
-    const startTear = () => {
-      tearTimer = window.setTimeout(() => completePaperReveal(), 1000);
-    };
-    if (document.readyState === "complete") startTear();
-    else window.addEventListener("load", startTear, { once: true });
-    paperSkip.addEventListener("click", () => completePaperReveal(true), { once: true });
-  }
-}
-
-const revealObserver = new IntersectionObserver(
-  (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("visible")),
-  { threshold: 0.06 },
-);
-document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
-
-const sections = [...document.querySelectorAll("main section[id]")];
-const navLinks = [...document.querySelectorAll(".nav-link")];
-const currentView = document.querySelector("#current-view");
-let activeUpdateQueued = false;
-
-const updateActiveSection = () => {
-  const marker = Math.min(window.innerHeight * 0.3, 190);
-  let active = sections[0];
-  sections.forEach((section) => {
-    if (section.getBoundingClientRect().top <= marker) active = section;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
   });
-  const matchingLink = navLinks.find((link) => link.dataset.section === active.id);
-  currentView.textContent = matchingLink?.dataset.label.toLowerCase().replaceAll(" ", "-") || active.id;
-  navLinks.forEach((link) => {
-    const isActive = link.dataset.section === active.id;
-    link.classList.toggle("active", isActive);
-    if (isActive) link.setAttribute("aria-current", "location");
-    else link.removeAttribute("aria-current");
-  });
-  activeUpdateQueued = false;
+}, { threshold: 0.04 });
+document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
+const hobbies = {
+  trekking: { symbol: '↟', title: 'One more trail.', description: 'Trekking is one of my favourite ways to step away from the screen, get outside and explore somewhere new.' },
+  rides: { symbol: '↗', title: 'Take the scenic route.', description: 'I enjoy heading out for rides. Sometimes a change of scenery is exactly what the day needs.' },
+  gaming: { symbol: '＋', title: 'A different kind of challenge.', description: 'Video games are part of my downtime. A chance to play, explore and get absorbed in a different world.' },
+  sports: { symbol: '◉', title: 'Always up for a game.', description: 'I enjoy playing sports. Getting moving and sharing a game is a good balance to time spent at a desk.' },
+  dance: { symbol: '♫', title: 'Find a little rhythm.', description: 'I dance, too. A different kind of energy, and another way to enjoy life outside engineering.' },
+  gym: { symbol: '↔', title: 'Keep showing up.', description: 'The gym is part of my routine. A little time to focus on movement and make room for myself outside work.' }
 };
-
-const queueActiveUpdate = () => {
-  if (activeUpdateQueued) return;
-  activeUpdateQueued = true;
-  window.requestAnimationFrame(updateActiveSection);
-};
-window.addEventListener("scroll", queueActiveUpdate, { passive: true });
-window.addEventListener("resize", queueActiveUpdate);
-updateActiveSection();
-
-const menuButton = document.querySelector("#menu-button");
-const menuScrim = document.querySelector("#menu-scrim");
-const setMenu = (open) => {
-  document.body.classList.toggle("menu-open", open);
-  menuButton.setAttribute("aria-expanded", String(open));
-  menuButton.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-  menuScrim.hidden = !open;
-};
-menuButton.addEventListener("click", () => setMenu(!document.body.classList.contains("menu-open")));
-menuScrim.addEventListener("click", () => setMenu(false));
-navLinks.forEach((link) => link.addEventListener("click", () => {
-  setMenu(false);
-  currentView.textContent = link.dataset.label.toLowerCase().replaceAll(" ", "-");
+const hobbyDialog = document.querySelector('#hobby-dialog');
+document.querySelectorAll('[data-hobby]').forEach(button => button.addEventListener('click', () => {
+  const hobby = hobbies[button.dataset.hobby];
+  hobbyDialog.querySelector('.hobby-symbol').textContent = hobby.symbol;
+  hobbyDialog.querySelector('h2').textContent = hobby.title;
+  hobbyDialog.querySelector('.hobby-description').textContent = hobby.description;
+  hobbyDialog.dataset.interest = button.dataset.hobby;
+  hobbyDialog.showModal();
 }));
-
-const commandDialog = document.querySelector("#command-dialog");
-const commandButton = document.querySelector("#command-button");
-const commandInput = document.querySelector("#command-input");
-const commandResults = document.querySelector("#command-results");
+hobbyDialog.querySelectorAll('button').forEach(button => button.addEventListener('click', () => hobbyDialog.close()));
+hobbyDialog.addEventListener('click', event => {
+  if (event.target !== hobbyDialog) return;
+  const box = hobbyDialog.getBoundingClientRect();
+  if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) hobbyDialog.close();
+});
+const navCommands = [['Trail map','overview'],['About me','about'],['Projects','projects'],['Experience','experience'],['Capabilities','capabilities'],['Applied AI','ai-projects'],['Education','education'],['Contact','contact']];
+const commandDialog = document.querySelector('#command-dialog');
+const commandInput = document.querySelector('#command-input');
+const commandResults = document.querySelector('#command-results');
 let selectedCommand = 0;
-
-const matchingCommands = () => navCommands.filter((command) =>
-  `${command.label} ${command.detail}`.toLowerCase().includes(commandInput.value.toLowerCase()),
-);
-
-const goToCommand = (target) => {
-  commandDialog.close();
-  document.getElementById(target)?.scrollIntoView({ behavior: "smooth", block: "start" });
-};
-
 const renderCommands = () => {
-  const matches = matchingCommands();
-  selectedCommand = Math.min(selectedCommand, Math.max(matches.length - 1, 0));
-  commandResults.innerHTML = matches.length
-    ? matches.map((command, index) => `
-        <button class="command-item ${index === selectedCommand ? "selected" : ""}" data-target="${command.target}" type="button">
-          <span>${command.label}</span><span>${command.detail}</span>
-        </button>`).join("")
-    : '<p class="command-empty">No matching section</p>';
-  commandResults.querySelectorAll(".command-item").forEach((item) => {
-    item.addEventListener("click", () => goToCommand(item.dataset.target));
+  const matches = navCommands.filter(([label]) => label.toLowerCase().includes(commandInput.value.toLowerCase()));
+  selectedCommand = Math.max(0, Math.min(selectedCommand, matches.length - 1));
+  commandResults.replaceChildren();
+  matches.forEach(([label,target],index) => {
+    const button = document.createElement('button'); button.type='button';
+    button.className='command-item'+(index===selectedCommand?' selected':''); button.textContent=label;
+    button.addEventListener('click',()=>{commandDialog.close();document.getElementById(target).scrollIntoView({behavior:reducedMotion.matches?'instant':'smooth'});});
+    commandResults.append(button);
   });
+  if (!matches.length) commandResults.textContent='No matching section';
 };
-
-const openCommands = () => {
-  selectedCommand = 0;
-  commandInput.value = "";
-  renderCommands();
-  commandDialog.showModal();
-  commandInput.focus();
-};
-commandButton.addEventListener("click", openCommands);
-commandInput.addEventListener("input", () => {
-  selectedCommand = 0;
-  renderCommands();
+commandInput.addEventListener('input',()=>{selectedCommand=0;renderCommands();});
+commandInput.addEventListener('keydown',event=>{
+  if(event.key==='ArrowDown'||event.key==='ArrowUp'){event.preventDefault();selectedCommand+=event.key==='ArrowDown'?1:-1;renderCommands();}
+  if(event.key==='Enter') commandResults.querySelector('.selected')?.click();
 });
-commandInput.addEventListener("keydown", (event) => {
-  const matches = matchingCommands();
-  if (event.key === "ArrowDown") selectedCommand = Math.min(selectedCommand + 1, matches.length - 1);
-  if (event.key === "ArrowUp") selectedCommand = Math.max(selectedCommand - 1, 0);
-  if (event.key === "Enter" && matches[selectedCommand]) goToCommand(matches[selectedCommand].target);
-  if (["ArrowDown", "ArrowUp"].includes(event.key)) {
-    event.preventDefault();
-    renderCommands();
+document.addEventListener('keydown',event=>{
+  if((event.metaKey||event.ctrlKey)&&event.key.toLowerCase()==='k'){
+    event.preventDefault();if(hobbyDialog.open)return;
+    if(commandDialog.open)commandDialog.close();
+    else{commandInput.value='';selectedCommand=0;renderCommands();commandDialog.showModal();commandInput.focus();}
   }
 });
-document.addEventListener("keydown", (event) => {
-  if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
-    event.preventDefault();
-    commandDialog.open ? commandDialog.close() : openCommands();
-  }
-  if (event.key === "Escape" && commandDialog.open) commandDialog.close();
-  if (event.key === "Escape" && document.body.classList.contains("menu-open")) setMenu(false);
+const dockLinks=[...document.querySelectorAll('.trail-dock a[href^="#"]')];
+const sectionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+  if(!entry.isIntersecting)return;
+  dockLinks.forEach(link=>{if(link.hash==='#'+entry.target.id)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');});
+}),{rootMargin:'-10% 0px -60% 0px'});
+document.querySelectorAll('main section[id]').forEach(section=>sectionObserver.observe(section));
+const copyEmail=document.querySelector('#copy-email');copyEmail.setAttribute('aria-live','polite');
+copyEmail.addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(copyEmail.dataset.email);copyEmail.textContent='Email copied';}catch{copyEmail.textContent=copyEmail.dataset.email;}
+  window.setTimeout(()=>{copyEmail.textContent='Copy email';},2500);
 });
-
-const copyEmail = document.querySelector("#copy-email");
-copyEmail.addEventListener("click", async () => {
-  const originalLabel = "Copy email";
-  try {
-    await navigator.clipboard.writeText(copyEmail.dataset.email);
-    copyEmail.textContent = "Email copied";
-  } catch {
-    copyEmail.textContent = copyEmail.dataset.email;
-  }
-  window.setTimeout(() => (copyEmail.textContent = originalLabel), 2200);
-});
-
-document.querySelector("#current-year").textContent = new Date().getFullYear();
+document.querySelector('#current-year').textContent=new Date().getFullYear();

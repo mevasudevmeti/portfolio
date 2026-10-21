@@ -2,11 +2,14 @@
 
 Portfolio website for **Vasudev Meti**, an experienced software engineer moving into evaluation-driven Applied AI and MLOps.
 
-The interface retains an operations-dashboard identity in a focused, light-only design. It prioritises inspectable project evidence, career progression and concise recruiter-facing content.
+An original illustrated mountain trail introduces the person behind the code. Interactive landmarks lead to an introduction, projects, career experience, Applied AI work and contact details. The detailed engineering evidence remains available below the landscape.
 
 ## Features
 
-- Responsive, light-only operations-dashboard interface
+- Responsive mountain landscape with five clickable landmarks and persistent recruiter navigation
+- Personal interest dialogs for trekking, rides, gaming, sports, dance and gym
+- Original AI-generated landscape, delivered as an optimised WebP asset
+- Expandable engineering details for the featured AutoOps case study
 - Featured case studies before experience and capabilities
 - Evidence-led project status, decisions, limitations and repository links
 - Keyboard command palette (`Ctrl/Cmd + K`)
@@ -27,7 +30,9 @@ Then visit `http://localhost:8080`.
 
 ## Content updates
 
-Content is written directly in `index.html`; `script.js` only handles navigation, the command palette, reveal effects and copy-email feedback. Add AI capabilities only when repository evidence demonstrates that they are implemented.
+Content is written directly in `index.html`. `styles.css` retains the case-study and content components; `trail.css` provides the landscape, navigation, personal introduction and responsive theme. `script.js` handles interest dialogs, the command palette, active navigation, reveal effects and copy-email feedback. Add AI capabilities only when repository evidence demonstrates that they are implemented.
+
+Validate local links, assets and accessible structure with `python verify-trail.py`, and check JavaScript syntax with `node --check script.js`.
 
 ## Deployment
 
