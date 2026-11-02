@@ -1,21 +1,18 @@
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const intro = document.querySelector('#journey-intro');
 let introTimer;
-let hasSeenIntro = false;
-try { hasSeenIntro = sessionStorage.getItem('vasu-trail-intro') === 'seen'; } catch { /* Storage may be disabled. */ }
 const openIntro = () => {
   window.clearTimeout(introTimer);
   intro.showModal();
   document.body.classList.add('journey-intro-open');
   introTimer = window.setTimeout(() => intro.close(), 3400);
 };
-if (!location.hash && !hasSeenIntro && !reducedMotion.matches) openIntro();
+openIntro();
 document.querySelector('#replay-intro').addEventListener('click', openIntro);
 intro.querySelector('.intro-skip').addEventListener('click', () => intro.close());
 intro.addEventListener('close', () => {
   window.clearTimeout(introTimer);
   document.body.classList.remove('journey-intro-open');
-  try { sessionStorage.setItem('vasu-trail-intro', 'seen'); } catch { /* Intro still works without storage. */ }
 });
 reducedMotion.addEventListener('change', event => { if (event.matches && intro.open) intro.close(); });
 const motionToggle = document.querySelector('#toggle-motion');
@@ -44,10 +41,10 @@ const revealObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.04 });
 document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
 const hobbies = {
-  trekking: { symbol: '↟', title: 'One more trail.', description: 'Trekking is one of my favourite ways to step away from the screen, get outside and explore somewhere new.' },
-  rides: { symbol: '🏍️', title: 'Take the scenic route.', description: 'I enjoy heading out for bike rides. Sometimes a change of scenery is exactly what the day needs.' },
+  trekking: { symbol: '↟', title: 'One more trail.', description: 'Trekking is one of my favourite ways to step away from the screen, get outside and explore somewhere new.', photo: 'assets/trek-snowdonia.webp', photoAlt: 'Vasudev trekking on a grassy mountain ridge in Snowdonia, Wales', caption: 'Snowdonia, Wales' },
+  rides: { symbol: '🏍️', title: 'Take the scenic route.', description: 'Somewhere with my Royal Enfield Meteor, taking the scenic route. I love heading out for rides, exploring new places and enjoying a change of scenery.', photo: 'assets/royal-enfield-meteor.webp', photoAlt: 'Vasudev wearing a helmet while seated on his Royal Enfield Meteor motorbike', caption: 'Royal Enfield Meteor' },
   gaming: { symbol: '🎮', title: 'A different kind of adventure.', description: 'I love games like Ghost of Yōtei. Exploring beautiful worlds, getting drawn into a story and taking on a new challenge are some of my favourite ways to switch off.' },
-  sports: { symbol: '◉', title: 'Always up for a game.', description: 'I enjoy playing sports. Getting moving and sharing a game is a good balance to time spent at a desk.' },
+  sports: { symbol: '◉', title: 'Always up for a game.', description: 'I love playing badminton — the quick rallies, the footwork and that moment before a smash. Getting moving and sharing a game is a good balance to time spent at a desk.', photo: 'assets/badminton-smash.webp', photoAlt: 'Cartoon-style illustration of Vasudev in a burgundy shirt jumping with his racket raised, ready to smash a badminton shuttlecock', caption: 'Badminton · Ready for the smash' },
   dance: { symbol: '🕺', title: 'Find a little rhythm.', description: 'I love to dance. A few moves, a little rhythm and a different kind of energy outside engineering.' },
   gym: { symbol: 'dumbbell', title: 'Keep showing up.', description: 'The gym is part of my routine. A little time to focus on movement, pick up the dumbbells and make room for myself outside work.' }
 };
@@ -57,7 +54,18 @@ document.querySelectorAll('[data-hobby]').forEach(button => button.addEventListe
   const symbol = hobbyDialog.querySelector('.hobby-symbol');
   symbol.textContent = hobby.symbol === 'dumbbell' ? '━' : hobby.symbol;
   symbol.classList.toggle('dumbbell-icon', hobby.symbol === 'dumbbell');
-  symbol.hidden = button.dataset.hobby === 'dance';
+  const hasPhoto = Boolean(hobby.photo);
+  symbol.hidden = button.dataset.hobby === 'dance' || hasPhoto;
+  hobbyDialog.classList.toggle('has-photo', hasPhoto);
+  hobbyDialog.querySelector('.hobby-photo').hidden = !hasPhoto;
+  const caption = hobbyDialog.querySelector('.hobby-location');
+  caption.hidden = !hasPhoto;
+  caption.textContent = hobby.caption || '';
+  if (hasPhoto) {
+    const photo = hobbyDialog.querySelector('.hobby-photo img');
+    photo.src = hobby.photo;
+    photo.alt = hobby.photoAlt;
+  }
   hobbyDialog.querySelector('.dance-stage').hidden = button.dataset.hobby !== 'dance';
   hobbyDialog.querySelector('h2').textContent = hobby.title;
   hobbyDialog.querySelector('.hobby-description').textContent = hobby.description;
