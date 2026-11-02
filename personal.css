@@ -1,4 +1,18 @@
 /* Opening journey and personal interest animations. */
+.hobby-photo[hidden], .hobby-location[hidden] { display:none; }
+.hobby-dialog[data-interest="trekking"] { width:min(850px,calc(100% - 32px)); max-height:calc(100dvh - 32px); padding:24px; }
+.hobby-dialog[data-interest="trekking"][open] { display:grid; grid-template-columns:minmax(0,300px) minmax(0,1fr); align-items:center; gap:36px; }
+.hobby-photo img { display:block; width:100%; height:450px; object-fit:cover; border-radius:12px; }
+.hobby-copy { min-width:0; }
+.hobby-location { margin:24px 0 10px; font:11px var(--font-mono); color:#607b4c; letter-spacing:1px; }
+.hobby-dialog[data-interest="trekking"] .hobby-copy { padding-right:12px; }
+@media(max-width:640px) {
+  .hobby-dialog[data-interest="trekking"][open] { grid-template-columns:1fr; gap:20px; padding:20px; }
+  .hobby-photo img { height: min(450px,50dvh); object-position:center 65%; }
+  .hobby-dialog[data-interest="trekking"] .hobby-copy { padding:0 4px 4px; }
+  .hobby-dialog[data-interest="trekking"] .dialog-close { background:#faf8ed; border-radius:50%; top:24px; right:24px; }
+  .hobby-location { margin-top:12px; }
+}
 .journey-intro { position:fixed; inset:0; width:100vw; max-width:none; height:100dvh; max-height:none; margin:0; padding:24px; border:0; color:#244334; background:radial-gradient(ellipse at 50% 40%,#fffdf2,#e7ecdc); overflow:auto; }
 .journey-intro[open] { display:grid; place-items:center; }
 .journey-intro::backdrop { background:#e7ecdc; }

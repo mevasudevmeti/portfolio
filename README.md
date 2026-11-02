@@ -7,8 +7,8 @@ An original illustrated mountain trail introduces the person behind the code. In
 ## Features
 
 - Responsive mountain landscape with five clickable landmarks and persistent recruiter navigation
-- Personal interest dialogs for trekking, rides, gaming, sports, dance and gym
-- A skippable 3.4-second opening with “A beginning without an end”, an animated endless mountain trail, and once-per-session playback. Direct section links and reduced-motion preferences bypass the intro.
+- Personal interest dialogs for trekking, rides, gaming, sports, dance and gym; trekking includes a 450px-tall Snowdonia photo beside its location and description, stacking vertically on phones
+- A skippable 3.4-second opening with “A beginning without an end”, an animated endless mountain trail, and playback on every page load, including section URLs. Reduced-motion preferences keep the intro static.
 - Bike and controller emoji, a dumbbell icon, Ghost of Yōtei in the gaming panel, and a short animated dancer sequence
 - Scattered controller, bike, basketball, weight-plate and moonwalker stickers; an original Ghost of Yōtei-inspired illustration appears on the intro and between sections
 - Small animation interludes keep decoration outside reading and navigation areas. Offscreen scenes pause; footer controls pause/resume animations and replay the opening. Reduced-motion preferences keep the decorations static.

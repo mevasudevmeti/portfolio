@@ -1,21 +1,18 @@
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const intro = document.querySelector('#journey-intro');
 let introTimer;
-let hasSeenIntro = false;
-try { hasSeenIntro = sessionStorage.getItem('vasu-trail-intro') === 'seen'; } catch { /* Storage may be disabled. */ }
 const openIntro = () => {
   window.clearTimeout(introTimer);
   intro.showModal();
   document.body.classList.add('journey-intro-open');
   introTimer = window.setTimeout(() => intro.close(), 3400);
 };
-if (!location.hash && !hasSeenIntro && !reducedMotion.matches) openIntro();
+openIntro();
 document.querySelector('#replay-intro').addEventListener('click', openIntro);
 intro.querySelector('.intro-skip').addEventListener('click', () => intro.close());
 intro.addEventListener('close', () => {
   window.clearTimeout(introTimer);
   document.body.classList.remove('journey-intro-open');
-  try { sessionStorage.setItem('vasu-trail-intro', 'seen'); } catch { /* Intro still works without storage. */ }
 });
 reducedMotion.addEventListener('change', event => { if (event.matches && intro.open) intro.close(); });
 const motionToggle = document.querySelector('#toggle-motion');
@@ -57,7 +54,10 @@ document.querySelectorAll('[data-hobby]').forEach(button => button.addEventListe
   const symbol = hobbyDialog.querySelector('.hobby-symbol');
   symbol.textContent = hobby.symbol === 'dumbbell' ? '━' : hobby.symbol;
   symbol.classList.toggle('dumbbell-icon', hobby.symbol === 'dumbbell');
-  symbol.hidden = button.dataset.hobby === 'dance';
+  const isTrekking = button.dataset.hobby === 'trekking';
+  symbol.hidden = button.dataset.hobby === 'dance' || isTrekking;
+  hobbyDialog.querySelector('.hobby-photo').hidden = !isTrekking;
+  hobbyDialog.querySelector('.hobby-location').hidden = !isTrekking;
   hobbyDialog.querySelector('.dance-stage').hidden = button.dataset.hobby !== 'dance';
   hobbyDialog.querySelector('h2').textContent = hobby.title;
   hobbyDialog.querySelector('.hobby-description').textContent = hobby.description;
