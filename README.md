@@ -6,6 +6,8 @@ An original illustrated mountain trail introduces the person behind the code. In
 
 ## Features
 
+- Certifications section before Education, with the AWS Certified AI Practitioner credential, official badge, issue/expiry dates and Credly verification link; also linked from the hero and keyboard section navigator
+
 - Responsive mountain landscape with five clickable landmarks and persistent recruiter navigation
 - Personal interest dialogs for trekking, rides, gaming, sports, dance and gym; trekking includes a 450px-tall Snowdonia photo beside its location and description, stacking vertically on phones
 - Rides pairs the supplied Royal Enfield Meteor photo with personal riding copy. Sports includes a reference-based cartoon illustration of a badminton jump smash. All three image-led dialogs share the responsive photo-and-text layout.
