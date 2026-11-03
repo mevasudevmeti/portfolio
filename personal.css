@@ -1,4 +1,22 @@
 /* Opening journey and personal interest animations. */
+.hero-certification { display:inline-flex; align-items:center; gap:9px; max-width:100%; padding:7px 11px; border:1px solid #74876250; border-radius:7px; background:#fcfaeccf; font-size:10px; text-decoration:none; color:#294a36; }
+.hero-certification:hover { background:#fffdf2; }
+.hero-cert-mark { padding:2px 5px; border-bottom:2px solid #d49246; font-size:9px; font-weight:700; }
+.certification-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:40px; align-items:center; padding:32px; border:1px solid var(--border); border-radius:18px; background:var(--panel); }
+.certification-badge { display:grid; place-items:center; padding:18px; border-radius:14px; background:#edf0e5; }
+.certification-badge img { display:block; width:100%; max-width:180px; height:auto; }
+.certification-copy h3 { margin:14px 0 7px; font-size:clamp(23px,3vw,31px); line-height:1.2; letter-spacing:-.8px; }
+.certification-copy>p { font-size:13px; color:var(--muted); line-height:1.8; }
+.certification-copy .certification-issuer { font-size:11px; color:#426949; }
+.certification-dates { display:flex; flex-wrap:wrap; gap:15px 35px; margin:22px 0; }
+.certification-dates dt { font:9px var(--font-mono); text-transform:uppercase; letter-spacing:1px; color:#6e7c61; }
+.certification-dates dd { margin:6px 0 0; font-size:12px; }
+@media(max-width:600px) {
+  .hero-certification { margin-top:0; font-size:9px; }
+  .landmarks { top:550px; bottom:85px; }
+  .certification-card { grid-template-columns:1fr; gap:23px; padding:24px; }
+  .certification-badge { width:170px; justify-self:center; }
+}
 .hobby-photo[hidden], .hobby-location[hidden] { display:none; }
 .hobby-dialog.has-photo { width:min(850px,calc(100% - 32px)); max-height:calc(100dvh - 32px); padding:24px; }
 .hobby-dialog.has-photo[open] { display:grid; grid-template-columns:minmax(0,300px) minmax(0,1fr); align-items:center; gap:36px; }

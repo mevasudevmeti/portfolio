@@ -78,7 +78,7 @@ hobbyDialog.addEventListener('click', event => {
   const box = hobbyDialog.getBoundingClientRect();
   if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) hobbyDialog.close();
 });
-const navCommands = [['Trail map','overview'],['About me','about'],['Projects','projects'],['Experience','experience'],['Capabilities','capabilities'],['Applied AI','ai-projects'],['Education','education'],['Contact','contact']];
+const navCommands = [['Trail map','overview'],['About me','about'],['Projects','projects'],['Experience','experience'],['Capabilities','capabilities'],['Applied AI','ai-projects'],['Certifications','certifications'],['Education','education'],['Contact','contact']];
 const commandDialog = document.querySelector('#command-dialog');
 const commandInput = document.querySelector('#command-input');
 const commandResults = document.querySelector('#command-results');
