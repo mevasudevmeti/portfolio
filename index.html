@@ -30,7 +30,14 @@
     <link rel="stylesheet" href="styles.css?v=trail-1" />
     <link rel="stylesheet" href="trail.css?v=trail-1" />
     <link rel="stylesheet" href="personal.css?v=certifications-1" />
-    <script src="script.js?v=certifications-1" defer></script>
+    <link rel="stylesheet" href="journey-scroll.css?v=7" />
+    <script src="journey-scroll.js?v=1" defer></script>
+    <script src="portrait-morph.js?v=2" defer></script>
+    <script src="portrait-switch.js?v=2" defer></script>
+    <link rel="stylesheet" href="motion-intro.css?v=motion-2" />
+    <script src="intro-glyphs.js?v=motion-2" defer></script>
+    <script src="intro-motion.js?v=motion-2" defer></script>
+    <script src="script.js?v=motion-2" defer></script>
   </head>
   <body>
     <svg class="sticker-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
@@ -62,27 +69,10 @@
       <symbol id="sticker-ball" viewBox="0 0 110 110"><circle cx="55" cy="55" r="43" fill="#f3e6bd" stroke="#fffdf1" stroke-width="10"/><circle cx="55" cy="55" r="38" fill="#c48950" stroke="#35513c" stroke-width="3"/><path d="M18 55H92M55 17V93M27 27Q77 55 27 83M83 27Q33 55 83 83" fill="none" stroke="#35513c" stroke-width="3"/></symbol>
     </defs></svg>
 
-    <dialog class="journey-intro" id="journey-intro" aria-labelledby="intro-tagline">
-
-      <div class="intro-stickers" aria-hidden="true">
-        <div class="intro-sticker intro-game"><img src="assets/yotei-sticker.webp" alt=""><span>GHOST OF YŌTEI / OFF THE CLOCK</span></div>
-        <svg class="intro-sticker intro-pad" viewBox="0 0 180 120"><use href="#sticker-controller"/></svg>
-        <div class="intro-sticker intro-dancer"><svg viewBox="0 0 160 180"><use href="#sticker-moonwalker"/></svg><span>A LITTLE MOONWALK</span></div>
-        <svg class="intro-sticker intro-weights" viewBox="0 0 170 140"><use href="#sticker-plates"/></svg>
-        <svg class="intro-sticker intro-ball" viewBox="0 0 110 110"><use href="#sticker-ball"/></svg>
-      </div>
-      <div class="intro-content">
-        <p class="intro-name">VASUDEV METI</p>
-        <svg class="intro-trail" viewBox="0 0 400 160" aria-hidden="true">
-          <path class="intro-mountains" d="M20 130 90 35 145 104 203 20 286 125 337 55 380 130" />
-          <path class="intro-infinity" d="M200 100 C160 42 60 42 60 100 C60 158 160 158 200 100 C240 42 340 42 340 100 C340 158 240 158 200 100" />
-          <circle class="intro-traveller" r="5" cx="0" cy="0" />
-        </svg>
-        <p class="intro-overline">EVERY TRAIL IS A NEW BEGINNING</p>
-        <h2 id="intro-tagline">A beginning<br><em>without an end.</em></h2>
-        <p class="intro-footnote">Build. Explore. Keep going.</p>
-      </div>
-      <button class="intro-skip" type="button">Enter the trail <span aria-hidden="true">↗</span></button>
+    <dialog class="journey-intro motion-intro" id="journey-intro" aria-labelledby="intro-tagline">
+      <h2 class="intro-readable" id="intro-tagline">A beginning without an end.</h2>
+      <canvas aria-hidden="true"></canvas>
+      <button class="intro-skip" type="button">Skip intro <span aria-hidden="true">↗</span></button>
     </dialog>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="ambient ambient-one" aria-hidden="true"></div>
@@ -116,7 +106,7 @@
             <a class="scroll-cue" href="#about">THERE'S MORE BELOW <span aria-hidden="true">↓</span></a>
           </section>
           <section class="section about-section" id="about" aria-labelledby="about-title">
-            <div class="about-portrait"><img src="assets/vasudev-meti.png" alt="Vasudev Meti" loading="lazy"></div>
+            <div class="about-portrait journey-portrait"><div class="landscape-dock" aria-hidden="true"></div><img class="trekking-figure" src="assets/vasu-trekking-illustration.webp" alt="Illustration of Vasudev in his orange trekking shirt and backpack" loading="eager"><img class="formal-figure" src="assets/vasu-suit-aligned.webp" alt="Vasudev in a formal suit" aria-hidden="true" loading="eager"><div class="portrait-switch" role="group" aria-label="Choose portrait"><button type="button" data-portrait="trail" aria-pressed="true">↟ On the trail</button><button type="button" data-portrait="work" aria-pressed="false">⌘ At work</button></div></div>
             <div class="about-copy"><p class="mono-kicker">WELCOME TO BASECAMP</p><h2 id="about-title">An engineer.<br>A little restless.<br><em>Always exploring.</em></h2>
               <p>I'm Vasudev Meti, a software engineer based in Leeds. I've spent 4+ years working across React, TypeScript and Java/Spring systems. Now I'm extending that foundation into Applied AI and MLOps, alongside an MSc in Advanced Computer Science.</p>
               <p>Away from the keyboard, you'll find me trekking, heading out for a ride, playing sports or video games, dancing, or getting a gym session in.</p>
