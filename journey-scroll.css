@@ -1,0 +1,38 @@
+/* A shared landscape, with ordinary native document scrolling. */
+.travelling-landscape{position:fixed;z-index:0;pointer-events:none;background:url('assets/trail-landscape.webp') center 58% / cover no-repeat;will-change:width,height,top,left,border-radius;overflow:hidden}
+.scroll-journey-enabled .app-shell{position:relative;z-index:1}
+.scroll-journey-enabled .trail-hero{background:transparent}
+.scroll-journey-enabled .landscape{visibility:hidden}
+.scroll-journey-enabled .trail-hero::before{opacity:calc(1 - var(--journey-progress,0))}
+.scroll-journey-enabled .trail-intro,.scroll-journey-enabled .landmarks,.scroll-journey-enabled .map-caption,.scroll-journey-enabled .scroll-cue{opacity:calc(1 - var(--journey-progress,0))}
+/* Keep the landmark nav untransformed: its absolute links are anchored to the hero. */
+.scroll-journey-enabled .trail-intro{transform:translateY(calc(var(--journey-progress,0) * -35px))}
+.about-portrait.journey-portrait{width:100%;max-width:430px;height:510px;padding:0;border:0;background:transparent;box-shadow:none;transform:none;isolation:isolate}
+.journey-portrait::before{display:none}
+.landscape-dock{position:absolute;width:340px;height:340px;right:0;top:95px;border-radius:50%;background:url('assets/trail-landscape.webp') center / cover}
+.scroll-journey-enabled .landscape-dock{background:transparent}
+.about-portrait.journey-portrait .trekking-figure{position:absolute;left:-35px;bottom:12px;width:340px;height:500px;object-fit:contain;object-position:bottom;filter:drop-shadow(0 12px 12px #213c3214);opacity:var(--arrival,1);transform:translateY(calc((1 - var(--arrival,1)) * 30px));border-radius:0}
+.journey-portrait .portrait-caption{position:absolute;bottom:-8px;left:0;right:0;margin:0;font-size:9px;letter-spacing:2px;color:var(--muted);opacity:var(--arrival,1)}
+@media(max-width:700px){.about-portrait.journey-portrait{max-width:310px;height:370px}.landscape-dock{width:260px;height:260px;top:65px}.about-portrait.journey-portrait .trekking-figure{width:255px;height:365px;left:-20px;bottom:8px}.journey-portrait .portrait-caption{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.travelling-landscape{display:none}.about-portrait.journey-portrait .trekking-figure{opacity:1;transform:none}}
+
+.trail-summary,.trail-note{color:#101010}
+@media(min-width:701px){.basecamp{top:78%}}
+/* Both portraits share the same visual stage; controls stay outside the crossfade. */
+.about-portrait.journey-portrait{margin-bottom:98px}
+.about-portrait.journey-portrait .trekking-figure{transition:opacity .5s ease}
+.about-portrait.journey-portrait .formal-figure{position:absolute;width:340px;height:500px;left:-35px;bottom:12px;object-fit:contain;object-position:center bottom;border-radius:0;opacity:0;pointer-events:none;transition:opacity .5s ease;filter:drop-shadow(0 12px 12px #213c3214);box-shadow:none}
+.about-portrait.journey-portrait.portrait-at-work .trekking-figure{opacity:0}
+.about-portrait.journey-portrait.portrait-at-work .formal-figure{opacity:var(--arrival,1)}
+.portrait-switch{position:absolute;bottom:-33px;left:0;right:0;display:flex;justify-content:center;gap:5px;z-index:2}
+.portrait-switch button{border:1px solid #cbd3bd;border-radius:30px;background:#faf9f2;color:#213c32;padding:9px 12px;font:10px var(--font-mono);cursor:pointer;white-space:nowrap}
+.portrait-switch button[aria-pressed=true]{background:#213c32;color:#f5f3e9;border-color:#213c32}
+.portrait-switch button:focus-visible{outline:2px solid #b9794c;outline-offset:3px}
+@media(max-width:700px){.about-portrait.journey-portrait .formal-figure{width:255px;height:365px;left:-20px;bottom:8px}.portrait-switch{bottom:-32px}.portrait-switch button{font-size:9px;padding:9px 10px}}
+@media(prefers-reduced-motion:reduce){.about-portrait.journey-portrait .formal-figure,.about-portrait.journey-portrait .trekking-figure{transition:none}}
+
+.about-portrait.journey-portrait .trekking-figure,.about-portrait.journey-portrait .formal-figure{transition:none}
+.portrait-morph{position:absolute;left:-35px;bottom:12px;width:340px;height:500px;pointer-events:none;display:none;opacity:var(--arrival,1);filter:drop-shadow(0 12px 12px #213c3214)}
+.portrait-morphing .portrait-morph{display:block}
+.about-portrait.journey-portrait.portrait-morphing .trekking-figure,.about-portrait.journey-portrait.portrait-morphing .formal-figure{visibility:hidden}
+@media(max-width:700px){.portrait-morph{left:-20px;bottom:8px;width:255px;height:365px}}

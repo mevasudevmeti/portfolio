@@ -1,17 +1,13 @@
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const intro = document.querySelector('#journey-intro');
-let introTimer;
 const openIntro = () => {
-  window.clearTimeout(introTimer);
-  intro.showModal();
-  document.body.classList.add('journey-intro-open');
-  introTimer = window.setTimeout(() => intro.close(), 3400);
+  window.IntroMotion.play();
 };
 openIntro();
 document.querySelector('#replay-intro').addEventListener('click', openIntro);
 intro.querySelector('.intro-skip').addEventListener('click', () => intro.close());
 intro.addEventListener('close', () => {
-  window.clearTimeout(introTimer);
+  window.IntroMotion.stop();
   document.body.classList.remove('journey-intro-open');
 });
 reducedMotion.addEventListener('change', event => { if (event.matches && intro.open) intro.close(); });
