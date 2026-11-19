@@ -1,0 +1,24 @@
+/* Body copy remains readable at every breakpoint; navigation keeps its own type scale. */
+.workspace p,
+.workspace .section p,
+body #hobby-dialog p,
+body #command-dialog p {
+  font-size:16px;
+  line-height:1.75;
+  color:#000;
+}
+.workspace .trail-hero .hello { font-size:25px; }
+.workspace .about-copy > p:not(.mono-kicker) { font-size:20px; line-height:1.75; }
+.workspace .experience-content ul { color:#000; }
+.workspace .experience-content li { font-size:16px; line-height:1.75; color:#000; }
+.workspace .experience-content li + li { margin-top:6px; }
+/* Larger copy needs room above the trail landmarks on narrow screens. */
+@media(max-width:600px) {
+  .trail-hero { height:auto; min-height:960px; }
+  .landmarks { position:relative; inset:auto; height:470px; margin:40px 17px 150px; }
+  .workspace .trail-hero .hello { font-size:22px; }
+  .role-progression li { flex-direction:column; align-items:flex-start; gap:4px; }
+}
+
+/* Technology labels use the same black text as the body copy. */
+.tech-list span { color:#000; }
